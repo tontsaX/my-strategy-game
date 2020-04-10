@@ -5,8 +5,7 @@ import java.util.LinkedList;
 import gameproject.graphics.GameComponent;
 import gameproject.graphics.Planet;
 
-// this class is responsible for assembling all game components and elements together
-// provides game components to the Game class
+// this class is responsible of providing game elments to Game class
 public class Handler {
 	
 	// LinkedList is better for data manipulating than ArrayList

@@ -79,8 +79,6 @@ public class Game extends Canvas implements Runnable {
 			gc.render(g);
 		}
 		
-		//hud.render(g);
-		
 		g.dispose();
 		bs.show();
 	}
