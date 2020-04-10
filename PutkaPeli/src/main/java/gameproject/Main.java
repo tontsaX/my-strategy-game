@@ -11,7 +11,6 @@ public class Main {
 
 	private static void play() {
 		Game game = new Game("My Strategy Game");
-		//new GameWindow(game);
 		game.start();
 	}
 	

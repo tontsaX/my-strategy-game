@@ -14,7 +14,7 @@ public class Game extends Canvas implements Runnable {
 	
 	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 	private static final int FPS = 60;
-	private static final double MS_PER_FRAME = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
+	private static final double MS_PER_UPDATE = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
 
 	private String title;
 	private Boolean running;
@@ -40,11 +40,22 @@ public class Game extends Canvas implements Runnable {
 	public void run() {
 		running = true;
 		
+		// source: https://gameprogrammingpatterns.com/game-loop.html
+		double previous = System.currentTimeMillis();
+		double lag = 0.0;
 		while(running) {
-			double start = System.currentTimeMillis();
+			double current = System.currentTimeMillis();
+			double elapsed = current - previous;
+			previous = current;
+			lag += elapsed;
 
 			// process user input
-			update();
+			
+			while(lag >= MS_PER_UPDATE) {
+				update();
+				lag -= MS_PER_UPDATE;
+			}
+			
 			render();
 			
 			TOOLKIT.sync(); // importan for unix-devices. Needs to be as a last step in the game loop

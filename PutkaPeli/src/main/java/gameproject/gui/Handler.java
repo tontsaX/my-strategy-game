@@ -14,7 +14,7 @@ public class Handler {
 	public Handler() {
 		// game components are created here
 		components = new LinkedList<>();
-		addGameComponent(new Planet(288, 208, 5, 0));
+		addGameComponent(new Planet(288, 208, 1, 0));
 	}
 	
 	public void addGameComponent(GameComponent component) {
