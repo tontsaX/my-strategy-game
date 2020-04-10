@@ -11,7 +11,10 @@ import gameproject.graphics.GameComponent;
 public class Game extends Canvas implements Runnable {
 
 	private static final long serialVersionUID = 1L;
+	
 	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
+	private static final int FPS = 60;
+	private static final double MS_PER_FRAME = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
 
 	private String title;
 	private Boolean running;
@@ -38,19 +41,13 @@ public class Game extends Canvas implements Runnable {
 		running = true;
 		
 		while(running) {
-			System.out.println("Toimintaa");
+			double start = System.currentTimeMillis();
+
 			// process user input
 			update();
 			render();
+			
 			TOOLKIT.sync(); // importan for unix-devices. Needs to be as a last step in the game loop
-
-			// sleep
-			try {
-				Thread.sleep(1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 		}
 		
 		stop();
