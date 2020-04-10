@@ -1,9 +1,16 @@
 package gameproject.graphics;
 
+import java.awt.Graphics;
+
 public abstract class GameComponent {
 
-	public GameComponent() {
-		// TODO Auto-generated constructor stub
+	protected int x, y;
+	
+	public GameComponent(int x, int y) {
+		this.x = x;
+		this.y = y;
 	}
 
+	public abstract void tick();
+	public abstract void render(Graphics g);
 }
