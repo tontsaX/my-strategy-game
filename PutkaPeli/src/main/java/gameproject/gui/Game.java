@@ -24,6 +24,7 @@ public class Game extends Canvas implements Runnable {
 	public Game(String title) {
 		this.title = title;
 		handler = new Handler();
+		
 		new GameWindow(this);
 	}
 	
