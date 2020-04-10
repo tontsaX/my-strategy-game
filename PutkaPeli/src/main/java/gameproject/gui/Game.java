@@ -40,9 +40,10 @@ public class Game extends Canvas implements Runnable {
 	public void run() {
 		running = true;
 		
-		// source: https://gameprogrammingpatterns.com/game-loop.html
+		// game loop source: https://gameprogrammingpatterns.com/game-loop.html
 		double previous = System.currentTimeMillis();
 		double lag = 0.0;
+		
 		while(running) {
 			double current = System.currentTimeMillis();
 			double elapsed = current - previous;
@@ -56,9 +57,13 @@ public class Game extends Canvas implements Runnable {
 				lag -= MS_PER_UPDATE;
 			}
 			
-			render();
+			// the lag velocity is under 1, so right now with Graphics its makes no difference
+			// because Graphics takes integer values as arguments
+			// if it'd be Graphics2D, then it'd be useful
+			render(lag / MS_PER_UPDATE); 
 			
-			TOOLKIT.sync(); // importan for unix-devices. Needs to be as a last step in the game loop
+			// important for unix-devices. Needs to be as the last step of the game loop
+			TOOLKIT.sync(); 
 		}
 		
 		stop();
@@ -70,7 +75,7 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 	
-	private void render() {
+	private void render(double velocity) {
 		BufferStrategy bs = this.getBufferStrategy();
 		
 		if(bs == null) {
@@ -82,6 +87,8 @@ public class Game extends Canvas implements Runnable {
 		
 		g.setColor(Color.black);
 		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
+		
+		handler.updateVelocity(velocity);
 		
 		for(GameComponent gc: handler.gameComponents()) {
 			gc.render(g);

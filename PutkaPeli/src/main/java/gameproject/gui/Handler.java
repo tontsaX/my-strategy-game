@@ -3,6 +3,7 @@ package gameproject.gui;
 import java.util.LinkedList;
 
 import gameproject.graphics.GameComponent;
+import gameproject.graphics.GameObject;
 import gameproject.graphics.Planet;
 
 // this class is responsible of providing game elments to Game class
@@ -30,5 +31,13 @@ public class Handler {
 	
 	public LinkedList<GameComponent> gameComponents() {
 		return components;
+	}
+	
+	public void updateVelocity(double velocity) {
+		for(GameComponent go: components) {
+			if(go instanceof GameObject) {
+				((GameObject) go).updateVelocity(velocity);
+			}
+		}
 	}
 }
