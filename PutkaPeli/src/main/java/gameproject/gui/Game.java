@@ -27,6 +27,8 @@ public class Game extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
+		running = true;
+		
 		while(running) {
 			// process user input
 			update();
@@ -34,6 +36,7 @@ public class Game extends JPanel implements Runnable {
 			TOOLKIT.sync(); // importan for unix-devices. Needs to be as a last step in the game loop
 			// sleep
 		}
+		
 		stop();
 	}
 	
