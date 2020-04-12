@@ -23,6 +23,7 @@ public class GameWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
+		setIgnoreRepaint(true);
 		
 		add(game); // itse peli tarvitsee muistaa lisätä peli-ikkunaan
 		
