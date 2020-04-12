@@ -1,7 +1,6 @@
 package gameproject.gui;
 
-import java.awt.event.MouseAdapter;
-// ehkä kevyempi on javax.swing kirjastosta ottaa
+import java.awt.event.MouseAdapter; // kevyempi kuin swing kirjastosta. ei huomattavaa eroa, mutta kevyempi
 
 public class MouseListener extends MouseAdapter {
 
