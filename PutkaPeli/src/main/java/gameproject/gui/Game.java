@@ -45,14 +45,14 @@ public class Game extends JPanel implements Runnable {
 		running = true;
 		
 		// game loop source: https://gameprogrammingpatterns.com/game-loop.html
-		double previous = System.currentTimeMillis();
+		double previousTime = System.currentTimeMillis();
 		double lag = 0.0;
 		
 		while(running) {
-			double current = System.currentTimeMillis();
-			double elapsed = current - previous;
-			previous = current;
-			lag += elapsed;
+			double currentTime = System.currentTimeMillis();
+			double elapsedTime = currentTime - previousTime;
+			previousTime = currentTime;
+			lag += elapsedTime;
 
 			// process user input
 			
@@ -64,7 +64,8 @@ public class Game extends JPanel implements Runnable {
 			// the lag velocity is under 1, so right now with Graphics its makes no difference
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
-			render(lag / MS_PER_UPDATE); 
+			double scaledVelocity = lag / MS_PER_UPDATE;
+			render(scaledVelocity); 
 			
 			// important for unix-devices. Needs to be as the last step of the game loop
 			TOOLKIT.sync(); 
@@ -80,26 +81,26 @@ public class Game extends JPanel implements Runnable {
 	}
 	
 	private void render(double velocity) {
-		BufferStrategy bs = gameWindow.getBufferStrategy();
+		BufferStrategy bufferStrategy = gameWindow.getBufferStrategy();
 		
-		if(bs == null) {
+		if(bufferStrategy == null) {
 			gameWindow.createBufferStrategy(3);
 			return;
 		}
 		
-		Graphics g = bs.getDrawGraphics();
+		Graphics graphics = bufferStrategy.getDrawGraphics();
 		
-		g.setColor(Color.black);
-		g.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
+		graphics.setColor(Color.black);
+		graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		
 		handler.updateVelocity(velocity);
 		
-		for(GameComponent gc: handler.gameComponents()) {
-			gc.render(g);
+		for(GameComponent gameComponent: handler.gameComponents()) {
+			gameComponent.render(graphics);
 		}
 		
-		g.dispose();
-		bs.show();
+		graphics.dispose();
+		bufferStrategy.show();
 	}
 	
 	public String getTitle() {
