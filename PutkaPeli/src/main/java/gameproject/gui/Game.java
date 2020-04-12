@@ -1,20 +1,23 @@
 package gameproject.gui;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 
+import javax.swing.JPanel;
+
 import gameproject.graphics.GameComponent;
 
-public class Game extends Canvas implements Runnable {
+public class Game extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	
 	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 	private static final int FPS = 60;
 	private static final double MS_PER_UPDATE = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
+	
+	private static GameWindow gameWindow;
 
 	private String title;
 	private Boolean running;
@@ -25,7 +28,7 @@ public class Game extends Canvas implements Runnable {
 		this.title = title;
 		handler = new Handler();
 		
-		new GameWindow(this);
+		gameWindow = new GameWindow(this);
 	}
 	
 	public synchronized void start() {
@@ -77,10 +80,10 @@ public class Game extends Canvas implements Runnable {
 	}
 	
 	private void render(double velocity) {
-		BufferStrategy bs = this.getBufferStrategy();
+		BufferStrategy bs = gameWindow.getBufferStrategy();
 		
 		if(bs == null) {
-			this.createBufferStrategy(3);
+			gameWindow.createBufferStrategy(3);
 			return;
 		}
 		
