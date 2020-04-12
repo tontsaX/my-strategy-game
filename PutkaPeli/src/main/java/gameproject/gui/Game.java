@@ -75,8 +75,8 @@ public class Game extends JPanel implements Runnable {
 	}
 	
 	private void update() {
-		for(GameComponent gc: handler.gameComponents()) {
-			gc.tick();
+		for(GameComponent gameComponent: handler.gameComponents()) {
+			gameComponent.tick();
 		}
 	}
 	
