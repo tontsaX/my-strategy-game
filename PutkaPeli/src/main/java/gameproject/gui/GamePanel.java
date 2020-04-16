@@ -3,7 +3,6 @@ package gameproject.gui;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Toolkit;
-import java.awt.image.BufferStrategy;
 
 import javax.swing.JPanel;
 
@@ -16,19 +15,17 @@ public class GamePanel extends JPanel implements Runnable {
 	
 	private static final int FPS = 60;
 	private static final double MS_PER_UPDATE = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
-
-	private String title;
 	
 	private Boolean running;
-	private Handler handler;
+	private Controller controller;
 	private Thread animator;
 	
-	public GamePanel() {
-		handler = new Handler();
+	public GamePanel(Controller controller) {
+		this.controller = controller;
 	}
 	
 	public void addNotify() {
-		super.addNotify(); // the JFrame should notify after the game is added to it
+		super.addNotify(); // GameWindow notifies GamePanel to start the game after it's added to GameWindow
 		startGame();
 	}
 	
@@ -78,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	private void update() {
-		for(GameComponent gameComponent: handler.gameComponents()) {
+		for(GameComponent gameComponent: controller.gameComponents()) {
 			gameComponent.tick();
 		}
 	}
@@ -88,16 +85,13 @@ public class GamePanel extends JPanel implements Runnable {
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 			
-		for(GameComponent gameComponent: handler.gameComponents()) {
+		for(GameComponent gameComponent: controller.gameComponents()) {
 			gameComponent.render(graphics);
 		}
 	}
 	
 	private void catchLag(double scaledVelocity) {
-		handler.updateVelocity(scaledVelocity);
+		controller.updateVelocity(scaledVelocity);
 	}
 	
-	public String getTitle() {
-		return this.title;
-	}
 }

@@ -7,15 +7,16 @@ import gameproject.graphics.GameObject;
 import gameproject.graphics.Planet;
 
 // this class is responsible of providing game elments to Game class
-public class Handler {
+public class Controller {
 	
 	// LinkedList is better for data manipulating than ArrayList
 	private LinkedList<GameComponent> components;
 	
-	public Handler() {
+	public Controller(LinkedList<GameComponent> gameComponents) {
 		// game components are created here
-		components = new LinkedList<>();
-		addGameComponent(new Planet(288, 208, 1, 0));
+//		components = new LinkedList<>();
+//		addGameComponent(new Planet(288, 208, 1, 0));
+		components = gameComponents;
 	}
 	
 	public void addGameComponent(GameComponent component) {
