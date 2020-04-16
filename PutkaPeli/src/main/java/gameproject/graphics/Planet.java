@@ -16,11 +16,13 @@ public class Planet extends GameObject {
 	
 	@Override
 	public void render(Graphics g) {
-		g.setColor(Color.red);
+		//g.setColor(Color.getColor("RED"));
+		g.setColor(color);
 		g.fillOval(x, y, 32, 32);
 	}
 	
 	private void spin() {
 		x += velX;
 	}
+
 }

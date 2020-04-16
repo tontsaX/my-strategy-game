@@ -6,16 +6,13 @@ import gameproject.graphics.GameComponent;
 import gameproject.graphics.GameObject;
 import gameproject.graphics.Planet;
 
-// this class is responsible of providing game elments to Game class
-public class Controller {
+// This class controls and updates game components
+public class Handler {
 	
 	// LinkedList is better for data manipulating than ArrayList
 	private LinkedList<GameComponent> components;
 	
-	public Controller(LinkedList<GameComponent> gameComponents) {
-		// game components are created here
-//		components = new LinkedList<>();
-//		addGameComponent(new Planet(288, 208, 1, 0));
+	public Handler(LinkedList<GameComponent> gameComponents) {
 		components = gameComponents;
 	}
 	
@@ -24,10 +21,18 @@ public class Controller {
 	}
 	
 	public void removeGameComponent(GameComponent component) {
+		/*
 		int index = components.indexOf(component);
 		if(index != 0) { // if components have some sort of things that aren't supposed to be removed
 			components.remove(component);
 		}
+		*/
+		/*
+		if(!(component instanceof GUIComponent)) {
+			components.remove(component);
+		}
+		*/
+		components.remove(component);
 	}
 	
 	public LinkedList<GameComponent> gameComponents() {

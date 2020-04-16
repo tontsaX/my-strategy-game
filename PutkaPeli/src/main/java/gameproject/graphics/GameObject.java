@@ -1,10 +1,11 @@
 package gameproject.graphics;
 
-import java.awt.Graphics;
+import java.awt.Color;
 
 public abstract class GameObject extends GameComponent {
 	
-	int velX, velY;
+	protected int velX, velY;
+	protected Color color;
 
 	public GameObject(int x, int y, int velX, int velY) {
 		super(x,y);
@@ -25,5 +26,9 @@ public abstract class GameObject extends GameComponent {
 			velX *= (int) velocity;
 			velY *= (int) velocity;
 		}
+	}
+	
+	public void setHexColor(String hex) {
+		this.color = Color.decode(hex);
 	}
 }
