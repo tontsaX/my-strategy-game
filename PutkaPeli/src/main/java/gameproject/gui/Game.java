@@ -21,7 +21,7 @@ public class Game extends JPanel implements Runnable {
 
 	private String title;
 	private Boolean running;
-	private Thread game;
+	private Thread animator;
 	private Handler handler;
 	
 	public Game(String title) {
@@ -29,22 +29,31 @@ public class Game extends JPanel implements Runnable {
 		handler = new Handler();
 		
 		gameWindow = new GameWindow(this);
+		gameWindow.createBufferStrategy(3);
 	}
 	
-	public synchronized void start() {
-		game = new Thread(this);
-		game.start();
+	/*
+	public void addNotify() {
+		super.addNotify(); // the JFrame should notify after the game is added to it
+		startGame();
+	}*/
+	
+	public void startGame() {
+		if(animator == null || !running) {	
+			animator = new Thread(this);
+			animator.start();
+		}
 	}
 	
-	public synchronized void stop() {
+	public void stopGame() {
 		running = false;
+		System.out.println("Game stopped.");
 	}
 
 	@Override
 	public void run() {
 		running = true;
 		
-		// game loop source: https://gameprogrammingpatterns.com/game-loop.html
 		double previousTime = System.currentTimeMillis();
 		double lag = 0.0;
 		
@@ -64,14 +73,14 @@ public class Game extends JPanel implements Runnable {
 			// the lag velocity is under 1, so right now with Graphics its makes no difference
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
-			double scaledVelocity = lag / MS_PER_UPDATE;
-			render(scaledVelocity); 
+			catchLag(lag / MS_PER_UPDATE);
+			render(); 
 			
 			// important for unix-devices. Needs to be as the last step of the game loop
 			TOOLKIT.sync(); 
 		}
 		
-		stop();
+		System.exit(0);
 	}
 	
 	private void update() {
@@ -80,27 +89,24 @@ public class Game extends JPanel implements Runnable {
 		}
 	}
 	
-	private void render(double velocity) {
+	private void render() {
 		BufferStrategy bufferStrategy = gameWindow.getBufferStrategy();
-		
-		if(bufferStrategy == null) {
-			gameWindow.createBufferStrategy(3);
-			return;
-		}
 		
 		Graphics graphics = bufferStrategy.getDrawGraphics();
 		
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
-		
-		handler.updateVelocity(velocity);
-		
+			
 		for(GameComponent gameComponent: handler.gameComponents()) {
 			gameComponent.render(graphics);
 		}
 		
 		graphics.dispose();
 		bufferStrategy.show();
+	}
+	
+	private void catchLag(double scaledVelocity) {
+		handler.updateVelocity(scaledVelocity);
 	}
 	
 	public String getTitle() {

@@ -11,7 +11,7 @@ public class Main {
 
 	private static void play() {
 		Game game = new Game("My Strategy Game");
-		game.start();
+		game.startGame();
 	}
 	
 }
