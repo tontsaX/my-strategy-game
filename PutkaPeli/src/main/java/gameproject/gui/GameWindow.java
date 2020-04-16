@@ -14,8 +14,8 @@ public class GameWindow extends JFrame {
 	public static final int WIDTH = 640;
 	public static final int HEIGHT = 480;
 	
-	public GameWindow(Game game) {
-		setTitle(game.getTitle());
+	public GameWindow(GamePanel game, String title) {
+		setTitle(title);
 		setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		setMaximumSize(new Dimension(WIDTH, HEIGHT));
 		setMinimumSize(new Dimension(WIDTH, HEIGHT));
@@ -25,7 +25,7 @@ public class GameWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setIgnoreRepaint(true);
 		
-		add(game); // itse peli tarvitsee muistaa lisätä peli-ikkunaan
+		add(game);
 		
 		setVisible(true);
 	}
