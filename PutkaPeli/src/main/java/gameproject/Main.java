@@ -3,8 +3,7 @@ package gameproject;
 public class Main {
 
 	public static void main(String[] args) {
-		//newGame();
-		new Game("My Game");
+		newGame();
 	}
 	
 	public static void newGame() {

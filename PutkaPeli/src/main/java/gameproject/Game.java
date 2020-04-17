@@ -1,6 +1,7 @@
 package gameproject;
 
 import java.awt.Toolkit;
+
 import java.util.LinkedList;
 
 import gameproject.graphics.GameComponent;
@@ -21,15 +22,16 @@ public class Game implements Runnable {
 	private static final int FPS = 60;
 	private static final double MS_PER_UPDATE = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
 	
+	private IO machine;
+	private Mouse mouse;
+	
+	private Handler handler;
+	
+	private GamePanel gamePanel;
+	private GameWindow gameWindow;
+	
 	private Boolean running;
 	private Thread animator;
-	private IO machine;
-	
-	// logiikka tulee tänne
-	Handler handler;
-	GamePanel gamePanel;
-	GameWindow gameWindow;
-	Mouse mouse;
 
 	public Game(String title) {
 		machine = new Machine<>();
@@ -39,7 +41,6 @@ public class Game implements Runnable {
 		gamePanel = new GamePanel(handler);
 		gamePanel.addMouseListener(mouse);
 		gameWindow = new GameWindow(gamePanel, title);
-		startGame();
 	}
 	
 	private LinkedList<GameComponent> createGameComponents() {
