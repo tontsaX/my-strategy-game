@@ -5,9 +5,12 @@ import java.util.LinkedList;
 
 import gameproject.graphics.GameComponent;
 import gameproject.graphics.Planet;
-import gameproject.gui.Handler;
 import gameproject.gui.GamePanel;
 import gameproject.gui.GameWindow;
+import gameproject.gui.Handler;
+import gameproject.io.IO;
+import gameproject.io.Machine;
+import gameproject.io.Mouse;
 
 // This class has the game logic and is responsible of the game loop
 public class Game implements Runnable {
@@ -26,12 +29,15 @@ public class Game implements Runnable {
 	Handler handler;
 	GamePanel gamePanel;
 	GameWindow gameWindow;
+	Mouse mouse;
 
 	public Game(String title) {
-		machine = new Machine();
+		machine = new Machine<>();
+		mouse = new Mouse(machine);
 		
 		handler = new Handler(createGameComponents());
 		gamePanel = new GamePanel(handler);
+		gamePanel.addMouseListener(mouse);
 		gameWindow = new GameWindow(gamePanel, title);
 		startGame();
 	}
@@ -44,8 +50,6 @@ public class Game implements Runnable {
 		
 		earth.setHexColor("#0000FF");
 		mars.setHexColor("#FF0000");
-		//components.add(new Planet(288, 208, 1, 0));
-		//components.add(new Planet(133, 150, 1, 0));
 		
 		components.add(earth);
 		components.add(mars);
@@ -53,19 +57,27 @@ public class Game implements Runnable {
 		return components;
 	}
 	
-	private void update() {
-		for(GameComponent gameComponent: handler.gameComponents()) {
-			gameComponent.tick();
+	public void startGame() {
+		if(gamePanel.readyToLaunch()) {
+			if(animator == null || !running) {	
+				animator = new Thread(this);
+				animator.start();
+			}
 		}
 	}
 	
-	public void catchLag(double scaledVelocity) {
-		handler.updateVelocity(scaledVelocity);
+	public void stopGame() {
+		running = false;
+		System.out.println("Game stopped.");
 	}
 	
-	// animation place
+	// GAME LOOP ////////
 	@Override
 	public void run() {
+		gameLoop();
+	}
+	
+	private void gameLoop() {
 		running = true;
 		
 		double previousTime = machine.time();
@@ -78,6 +90,7 @@ public class Game implements Runnable {
 			lag += elapsedTime;
 
 			// process user input
+			userInput();
 			
 			while(lag >= MS_PER_UPDATE) {
 				update();
@@ -95,22 +108,28 @@ public class Game implements Runnable {
 		}
 		
 		machine.exitSystem();
-		
 	}
 	
-	public void startGame() {
-		if(gamePanel.readyToLaunch()) {
-			if(animator == null || !running) {	
-				animator = new Thread(this);
-				animator.start();
-			}
+	private void userInput() {
+		int[] cursorCoordinates = (int[])machine.getUserInput();
+		if(cursorCoordinates != null) {
+			machine.print("Clicked (" 
+					+ cursorCoordinates[0] + ", "
+					+ cursorCoordinates[1] + ")");
 		}
 	}
 	
-	public void stopGame() {
-		running = false;
-		System.out.println("Game stopped.");
+	private void update() {
+		for(GameComponent gameComponent: handler.gameComponents()) {
+			gameComponent.tick();
+		}
 	}
+	
+	private void catchLag(double scaledVelocity) {
+		handler.updateVelocity(scaledVelocity);
+	}
+	
+	///////////////////////////
 	
 	public void setConsole(IO io) {
 		machine = io;

@@ -1,8 +1,11 @@
-package gameproject.gui;
+package gameproject.io;
 
 import java.awt.event.MouseAdapter; // kevyempi kuin swing kirjastosta. ei huomattavaa eroa, mutta kevyempi
+import java.awt.event.MouseEvent;
 
-public class MouseListener extends MouseAdapter {
+public class Mouse extends MouseAdapter {
+	
+	private IO<int[]> io;
 
 	/* Toiminta-idea
 	 * Klikatessa näytölle piirtyy näkymätön tai hyvin pieni muoto,
@@ -10,4 +13,13 @@ public class MouseListener extends MouseAdapter {
 	 * ja klikkauksen alueella oleva muoto. Kun muodot risteävät on true,
 	 * niin se tarkoittaa, että muoto on valittu.
 	 * */
+	
+	public Mouse(IO<int[]> io) {
+		this.io = io;
+	}
+	
+	public void mouseClicked(MouseEvent e) {
+		int[] coordinates = {e.getX(), e.getY()};
+		io.userInput(coordinates);
+	}
 }

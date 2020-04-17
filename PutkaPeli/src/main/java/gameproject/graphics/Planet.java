@@ -22,7 +22,7 @@ public class Planet extends GameObject {
 	}
 	
 	private void spin() {
-		x += velX;
+		
 	}
 
 }
