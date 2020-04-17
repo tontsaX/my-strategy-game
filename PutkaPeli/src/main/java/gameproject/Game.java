@@ -137,7 +137,6 @@ public class Game implements Runnable {
 	private void catchLag(double scaledVelocity) {
 		handler.updateVelocity(scaledVelocity);
 	}
-	
 	///////////////////////////
 	
 	public void setConsole(IO io) {
