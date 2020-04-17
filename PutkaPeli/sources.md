@@ -1,4 +1,4 @@
-Sources I used to write this program
+Sources I've used during this project.
 
 Java game tutorial by RealTutsGML used for [the first game loop
 and starting graphics handling.](https://www.youtube.com/playlist?list=PLWms45O3n--6TvZmtFHaCWRZwEqnz2MHa
@@ -6,3 +6,5 @@ and starting graphics handling.](https://www.youtube.com/playlist?list=PLWms45O3
 
 Game Programming Patterns [web release](https://gameprogrammingpatterns.com/) by Robert Nystrom.
 More specified information about [game loop.](https://gameprogrammingpatterns.com/game-loop.html)
+
+Tutorialspoint Mouse Adapter [example.](https://www.tutorialspoint.com/swing/swing_mouseadapter.htm)

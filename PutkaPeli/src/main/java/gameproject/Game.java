@@ -1,7 +1,8 @@
 package gameproject;
 
 import java.awt.Toolkit;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
 import gameproject.graphics.GameComponent;
@@ -38,9 +39,16 @@ public class Game implements Runnable {
 		mouse = new Mouse(machine);
 		
 		handler = new Handler(createGameComponents());
+		
 		gamePanel = new GamePanel(handler);
 		gamePanel.addMouseListener(mouse);
+		
 		gameWindow = new GameWindow(gamePanel, title);
+		gameWindow.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent windowEvent) {
+				machine.exitSystem();
+			}
+		});
 	}
 	
 	private LinkedList<GameComponent> createGameComponents() {
