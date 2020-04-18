@@ -139,8 +139,4 @@ public class Game implements Runnable {
 	}
 	///////////////////////////
 	
-	public void setConsole(IO io) {
-		machine = io;
-	}
-	
 }
