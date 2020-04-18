@@ -23,7 +23,7 @@ public class Game implements Runnable {
 	private static final int FPS = 60;
 	private static final double MS_PER_UPDATE = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
 	
-	private IO machine;
+	private IO<int[]> machine;
 	private Mouse mouse;
 	
 	private Handler handler;
