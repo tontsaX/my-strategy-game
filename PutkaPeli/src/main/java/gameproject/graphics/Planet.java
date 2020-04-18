@@ -25,7 +25,7 @@ public class Planet extends GameObject {
 	public void render(Graphics g) {
 		if(selected) {
 			g.setColor(Color.cyan);
-			g.fillOval(x, y, width+5, height+5);
+			g.fillOval(borderX, borderY, borderW, borderH);
 		}
 		g.setColor(color);
 		g.fillOval(x, y, width, height);

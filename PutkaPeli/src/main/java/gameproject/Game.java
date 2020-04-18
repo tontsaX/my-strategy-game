@@ -110,7 +110,6 @@ public class Game implements Runnable {
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
 			catchLag(lag / MS_PER_UPDATE);
-			
 			render();
 
 			// important for unix-devices. Needs to be as the last step of the game loop

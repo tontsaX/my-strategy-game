@@ -7,15 +7,24 @@ import java.awt.Shape;
 
 public abstract class GameComponent {
 
-	protected int x, y, width, height;
+	protected int x, y, width, height; 
+	protected int borderX, borderY, borderW, borderH;
+	protected int borderSize;
+	
 	protected boolean selected;
-	protected Color color;
+	protected Color color, borderColor;
 	
 	public GameComponent(int x, int y, int width, int height) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
 		this.height = height;
+		
+		borderSize = 6;
+		borderX = x - borderSize/2;
+		borderY = y - borderSize/2;
+		borderW = this.width + borderSize;
+		borderH = this.height + borderSize;
 	}
 	
 	public abstract void update();
@@ -25,11 +34,11 @@ public abstract class GameComponent {
 		this.color = Color.decode(hex);
 	}
 	
-	public void setSelected(boolean selected) {
+	public void isSelected(boolean selected) {
 		this.selected = selected;
 	}
 	
-	public boolean selected() {
+	public boolean selected(boolean selected) {
 		return this.selected;
 	}
 	

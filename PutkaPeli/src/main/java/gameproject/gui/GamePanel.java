@@ -7,7 +7,6 @@ import java.util.LinkedList;
 import javax.swing.JPanel;
 
 import gameproject.graphics.GameComponent;
-import gameproject.graphics.Handler;
 
 public class GamePanel extends JPanel {
 
@@ -45,5 +44,4 @@ public class GamePanel extends JPanel {
 			gameComponent.render(graphics);
 		}
 	}
-	
 }
