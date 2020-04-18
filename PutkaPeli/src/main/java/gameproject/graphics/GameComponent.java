@@ -30,8 +30,12 @@ public abstract class GameComponent {
 	public abstract void update();
 	public abstract void render(Graphics g);
 	
-	public void setHexColor(String hex) {
+	public void setColorHex(String hex) {
 		this.color = Color.decode(hex);
+	}
+	
+	public void setBorderColorHex(String hex) {
+		this.borderColor = Color.decode(hex);
 	}
 	
 	public void isSelected(boolean selected) {
