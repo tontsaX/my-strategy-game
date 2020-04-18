@@ -14,16 +14,16 @@ import gameproject.io.IO;
 import gameproject.io.Machine;
 import gameproject.io.Mouse;
 
-// This class has the game logic and is responsible of the game loop
+// This class is responsible of running the game
 public class Game implements Runnable {
-	
-	// game loop objects
+
 	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 	
+	private static final int MILLISECONDS = 1000;
 	private static final int FPS = 60;
-	private static final double MS_PER_UPDATE = 1000 / FPS; // 1000 ms / FPS = milliseconds per frame
+	private static final double MS_PER_UPDATE = MILLISECONDS / FPS;
 	
-	private IO machine;
+	private IO console;
 	private Mouse mouse;
 	
 	private Handler handler;
@@ -35,7 +35,7 @@ public class Game implements Runnable {
 	private Thread animator;
 
 	public Game(String title) {
-		machine = new Machine();
+		console = new Machine();
 		mouse = new Mouse();
 		
 		handler = new Handler(createGameComponents());
@@ -46,7 +46,7 @@ public class Game implements Runnable {
 		gameWindow = new GameWindow(gamePanel, title);
 		gameWindow.addWindowListener(new WindowAdapter() {
 			public void windowClosing(WindowEvent windowEvent) {
-				machine.exitSystem();
+				console.exitSystem();
 			}
 		});
 	}
@@ -80,7 +80,7 @@ public class Game implements Runnable {
 		System.out.println("Game stopped.");
 	}
 	
-	// GAME LOOP ////////
+	// ------GAME LOOP--------------------------------
 	@Override
 	public void run() {
 		gameLoop();
@@ -89,16 +89,15 @@ public class Game implements Runnable {
 	private void gameLoop() {
 		running = true;
 		
-		double previousTime = machine.time();
+		double previousTime = console.time();
 		double lag = 0.0;
 		
 		while(running) {
-			double currentTime = machine.time();
+			double currentTime = console.time();
 			double elapsedTime = currentTime - previousTime;
 			previousTime = currentTime;
 			lag += elapsedTime;
 
-			// process user input
 			userInput();
 			
 			while(lag >= MS_PER_UPDATE) {
@@ -116,12 +115,12 @@ public class Game implements Runnable {
 			TOOLKIT.sync(); 
 		}
 		
-		machine.exitSystem();
+		console.exitSystem();
 	}
 	
 	private void userInput() {
 		if(mouse.clicked()) {
-			machine.print("Clicked (" 
+			console.print("Clicked (" 
 					+ mouse.getX() + ", "
 					+ mouse.getY() + ")");
 		}
@@ -129,13 +128,13 @@ public class Game implements Runnable {
 	
 	private void update() {
 		for(GameComponent gameComponent: handler.gameComponents()) {
-			gameComponent.tick();
+			gameComponent.update();
 		}
 	}
 	
 	private void catchLag(double scaledVelocity) {
 		handler.updateVelocity(scaledVelocity);
 	}
-	///////////////////////////
+	//----------------------------------------------------
 	
 }

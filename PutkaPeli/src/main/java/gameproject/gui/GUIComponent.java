@@ -13,7 +13,7 @@ public class GUIComponent extends GameComponent {
 	}
 
 	@Override
-	public void tick() {
+	public void update() {
 		// TODO Auto-generated method stub
 
 	}

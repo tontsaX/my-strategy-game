@@ -11,6 +11,6 @@ public abstract class GameComponent {
 		this.y = y;
 	}
 
-	public abstract void tick();
+	public abstract void update();
 	public abstract void render(Graphics g);
 }
