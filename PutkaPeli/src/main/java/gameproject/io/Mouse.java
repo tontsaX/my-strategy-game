@@ -4,8 +4,6 @@ import java.awt.event.MouseAdapter; // kevyempi kuin swing kirjastosta. ei huoma
 import java.awt.event.MouseEvent;
 
 public class Mouse extends MouseAdapter {
-	
-	private IO<int[]> io;
 
 	/* Toiminta-idea
 	 * Klikatessa näytölle piirtyy näkymätön tai hyvin pieni muoto,
@@ -14,12 +12,30 @@ public class Mouse extends MouseAdapter {
 	 * niin se tarkoittaa, että muoto on valittu.
 	 * */
 	
-	public Mouse(IO<int[]> io) {
-		this.io = io;
+	private int x, y;
+	private boolean clicked;
+	
+	public Mouse() {
+		clicked = false;
 	}
 	
 	public void mouseClicked(MouseEvent e) {
-		int[] coordinates = {e.getX(), e.getY()};
-		io.userInput(coordinates);
+		clicked = true;
+		x = e.getX();
+		y = e.getY();
+	}
+	
+	public int getX() {
+		clicked = false;
+		return x;
+	}
+	
+	public int getY() {
+		clicked = false;
+		return y;
+	}
+	
+	public boolean clicked() {
+		return clicked;
 	}
 }

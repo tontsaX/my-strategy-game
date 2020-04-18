@@ -35,8 +35,8 @@ public class Game implements Runnable {
 	private Thread animator;
 
 	public Game(String title) {
-		machine = new Machine<>();
-		mouse = new Mouse(machine);
+		machine = new Machine();
+		mouse = new Mouse();
 		
 		handler = new Handler(createGameComponents());
 		
@@ -120,11 +120,10 @@ public class Game implements Runnable {
 	}
 	
 	private void userInput() {
-		int[] cursorCoordinates = (int[])machine.getUserInput();
-		if(cursorCoordinates != null) {
+		if(mouse.clicked()) {
 			machine.print("Clicked (" 
-					+ cursorCoordinates[0] + ", "
-					+ cursorCoordinates[1] + ")");
+					+ mouse.getX() + ", "
+					+ mouse.getY() + ")");
 		}
 	}
 	
