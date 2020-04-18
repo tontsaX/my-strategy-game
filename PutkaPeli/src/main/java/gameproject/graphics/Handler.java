@@ -1,10 +1,6 @@
-package gameproject.gui;
+package gameproject.graphics;
 
 import java.util.LinkedList;
-
-import gameproject.graphics.GameComponent;
-import gameproject.graphics.GameObject;
-import gameproject.graphics.Planet;
 
 // This class controls and updates game components
 public class Handler {
@@ -21,28 +17,31 @@ public class Handler {
 	}
 	
 	public void removeGameComponent(GameComponent component) {
-		/*
-		int index = components.indexOf(component);
-		if(index != 0) { // if components have some sort of things that aren't supposed to be removed
-			components.remove(component);
-		}
-		*/
-		/*
-		if(!(component instanceof GUIComponent)) {
-			components.remove(component);
-		}
-		*/
 		components.remove(component);
 	}
 	
-	public LinkedList<GameComponent> gameComponents() {
+	public LinkedList<GameComponent> getGameComponents() {
 		return components;
+	}
+	
+	public void updateGameComponents() {
+		for(GameComponent gameComponent: components) {
+			gameComponent.update();
+		}
 	}
 	
 	public void updateVelocity(double velocity) {
 		for(GameComponent go: components) {
 			if(go instanceof GameObject) {
 				((GameObject) go).updateVelocity(velocity);
+			}
+		}
+	}
+
+	public void makeSelected(int x, int y) {
+		for(GameComponent go: components) {
+			if(go.getBounds().contains(x, y)) {
+				go.setSelected(true);
 			}
 		}
 	}

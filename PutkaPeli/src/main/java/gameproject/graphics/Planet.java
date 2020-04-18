@@ -1,12 +1,14 @@
 package gameproject.graphics;
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
 
 public class Planet extends GameObject {
 
-	public Planet(int x, int y, int width, int height, int velX, int velY) {
-		super(x, y, width, height, velX, velY);
+	public Planet(int x, int y, int width, int height, int velocityX, int velocityY) {
+		super(x, y, width, height, velocityX, velocityY);
 	}
 
 	@Override
@@ -16,18 +18,21 @@ public class Planet extends GameObject {
 	
 	@Override
 	public Shape getBounds() {
-		return null; // palauta ellipsi
+		return new Ellipse2D.Float(x, y, width, height);
 	}
 	
 	@Override
 	public void render(Graphics g) {
-		//g.setColor(Color.getColor("RED"));
+		if(selected) {
+			g.setColor(Color.cyan);
+			g.fillOval(x, y, width+5, height+5);
+		}
 		g.setColor(color);
 		g.fillOval(x, y, width, height);
 	}
 	
 	private void spin() {
-		
+
 	}
 
 }

@@ -6,10 +6,10 @@ import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
 import gameproject.graphics.GameComponent;
+import gameproject.graphics.Handler;
 import gameproject.graphics.Planet;
 import gameproject.gui.GamePanel;
 import gameproject.gui.GameWindow;
-import gameproject.gui.Handler;
 import gameproject.io.IO;
 import gameproject.io.Machine;
 import gameproject.io.Mouse;
@@ -40,7 +40,7 @@ public class Game implements Runnable {
 		
 		handler = new Handler(createGameComponents());
 		
-		gamePanel = new GamePanel(handler);
+		gamePanel = new GamePanel();
 		gamePanel.addMouseListener(mouse);
 		
 		gameWindow = new GameWindow(gamePanel, title);
@@ -54,6 +54,7 @@ public class Game implements Runnable {
 	private LinkedList<GameComponent> createGameComponents() {
 		LinkedList<GameComponent> components = new LinkedList<>();
 		
+		// Planet(coordinates x y, width, height, velocity/speed x y)
 		Planet earth = new Planet(288, 208, 50, 50, 0, 0);
 		Planet mars = new Planet(133, 150, 40, 40, 0, 0);
 		
@@ -109,7 +110,8 @@ public class Game implements Runnable {
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
 			catchLag(lag / MS_PER_UPDATE);
-			gamePanel.repaint();
+			
+			render();
 
 			// important for unix-devices. Needs to be as the last step of the game loop
 			TOOLKIT.sync(); 
@@ -120,20 +122,27 @@ public class Game implements Runnable {
 	
 	private void userInput() {
 		if(mouse.clicked()) {
+			// käytä contains(x,y) metodia klikkauksen tarkastukseen mieluummin kuin intersects()
+			// contains(x,y) tarkistaa, jos sille annetut koordinaatit ovat muodon sisällä
+			// johtaa tarkempaan valitsemistoimintaan ja poistaa mahdollisuuden valita muoto sen rajojen ulkopuolelta
 			console.print("Clicked (" 
 					+ mouse.getX() + ", "
 					+ mouse.getY() + ")");
+			handler.makeSelected(mouse.getX(), mouse.getY());
 		}
 	}
 	
 	private void update() {
-		for(GameComponent gameComponent: handler.gameComponents()) {
-			gameComponent.update();
-		}
+		handler.updateGameComponents();
 	}
 	
 	private void catchLag(double scaledVelocity) {
 		handler.updateVelocity(scaledVelocity);
+	}
+	
+	private void render() {
+		gamePanel.setGameComponents(handler.getGameComponents());
+		gamePanel.repaint();
 	}
 	//----------------------------------------------------
 	

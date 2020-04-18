@@ -2,12 +2,12 @@ package gameproject.graphics;
 
 public abstract class GameObject extends GameComponent {
 	
-	protected int velX, velY;
+	protected int velocityX, velocityY;
 
 	public GameObject(int x, int y, int width, int height, int velX, int velY) {
 		super(x, y, width, height);
-		this.velX = velX;
-		this.velY = velY;
+		this.velocityX = velX;
+		this.velocityY = velY;
 	}
 
 	/*
@@ -20,8 +20,8 @@ public abstract class GameObject extends GameComponent {
 	
 	public void updateVelocity(double velocity) {
 		if(velocity >= 1) {
-			velX *= (int) velocity;
-			velY *= (int) velocity;
+			velocityX *= (int) velocity;
+			velocityY *= (int) velocity;
 		}
 	}
 	

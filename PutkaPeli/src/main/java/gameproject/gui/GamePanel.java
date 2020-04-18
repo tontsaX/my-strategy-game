@@ -2,23 +2,26 @@ package gameproject.gui;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.LinkedList;
 
 import javax.swing.JPanel;
 
 import gameproject.graphics.GameComponent;
+import gameproject.graphics.Handler;
 
 public class GamePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private boolean addedToFrame = false;
 
-	private Handler handler;
+	private LinkedList<GameComponent> gameComponents;
 	
-	public GamePanel(Handler controller) {
-		this.handler = controller;
+	public GamePanel() {
+		gameComponents = new LinkedList<>();
 	}
 	
 	// Connects this component to a native screen resource
+	@Override
 	public void addNotify() {
 		super.addNotify();
 		addedToFrame = true;
@@ -28,12 +31,17 @@ public class GamePanel extends JPanel {
 		return addedToFrame;
 	}
 	
+	public void setGameComponents(LinkedList<GameComponent> gameComponents) {
+		this.gameComponents = gameComponents;
+	}
+	
+	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		graphics.setColor(Color.black);
 		graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
-			
-		for(GameComponent gameComponent: handler.gameComponents()) {
+
+		for(GameComponent gameComponent: gameComponents) {
 			gameComponent.render(graphics);
 		}
 	}
