@@ -7,8 +7,8 @@ import gameproject.graphics.GameComponent;
 
 public class GUIComponent extends GameComponent {
 
-	public GUIComponent(int x, int y) {
-		super(x, y);
+	public GUIComponent(int x, int y, int width, int height) {
+		super(x, y, width, height);
 		// TODO Auto-generated constructor stub
 	}
 

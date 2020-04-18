@@ -11,8 +11,8 @@ public class GameWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int WIDTH = 640;
-	public static final int HEIGHT = 480;
+	public static final int WIDTH = 1080;
+	public static final int HEIGHT = 680;
 	
 	public GameWindow(GamePanel game, String title) {
 		setTitle(title);

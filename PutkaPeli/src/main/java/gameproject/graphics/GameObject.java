@@ -1,14 +1,11 @@
 package gameproject.graphics;
 
-import java.awt.Color;
-
 public abstract class GameObject extends GameComponent {
 	
 	protected int velX, velY;
-	protected Color color;
 
-	public GameObject(int x, int y, int velX, int velY) {
-		super(x,y);
+	public GameObject(int x, int y, int width, int height, int velX, int velY) {
+		super(x, y, width, height);
 		this.velX = velX;
 		this.velY = velY;
 	}
@@ -28,7 +25,4 @@ public abstract class GameObject extends GameComponent {
 		}
 	}
 	
-	public void setHexColor(String hex) {
-		this.color = Color.decode(hex);
-	}
 }

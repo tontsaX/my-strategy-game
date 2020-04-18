@@ -54,8 +54,8 @@ public class Game implements Runnable {
 	private LinkedList<GameComponent> createGameComponents() {
 		LinkedList<GameComponent> components = new LinkedList<>();
 		
-		Planet earth = new Planet(288, 208, 0, 0);
-		Planet mars = new Planet(133, 150, 0, 0);
+		Planet earth = new Planet(288, 208, 50, 50, 0, 0);
+		Planet mars = new Planet(133, 150, 40, 40, 0, 0);
 		
 		earth.setHexColor("#0000FF");
 		mars.setHexColor("#FF0000");
