@@ -1,0 +1,15 @@
+
+Ensin tarvitaan spritejen määrä.
+  Spritejen määrä jaetaan 1 sekunnilla, mistä saadaan ms_per_sprite.
+    ms_per_sprite jaetaan ms_per_update, mistä saadaan update_points_per_sprite.
+Ratkaisussa spritejen määrä vaikuttaa pyörimisnopeuteen.
+
+Jos kaikilla planeetoilla on saman verran spritejä (4), niin yhden spriten tulisi
+pysyä kauemmin näkyvillä jotta planeetalla olisi pidempi pyörähdysaika. Tässä 
+tapauksessa neljä spriteä on Telluksen 24h mikä tekee 15,6 update_points_per_sprite.
+Jokainen ms_per_update pituinen kierros lisää yhden pisteen sprite_point muuttujaan.
+Kun sprite_point on yhtäsuuri tai suurempi kuin update_points_per_sprite, sprite
+vaihtuu.
+
+Haluan luoda planeetan konstruktorilla Planet(x,y,spritesList,dayInHours).
+Tällä hetkellä se tulee testien perusteella olemaan muotoa Planet(x,y,spritesList,ms_per_sprite).
