@@ -58,8 +58,10 @@ public class Game implements Runnable {
 		Planet earth = new Planet(288, 208, 50, 50, 0, 0);
 		Planet mars = new Planet(133, 150, 40, 40, 0, 0);
 		
-		earth.setColorHex("#0000FF");
-		mars.setColorHex("#FF0000");
+		earth.setColorHex("#1E90FF");
+		earth.setBorderColorHex("#00BFFF");
+		mars.setColorHex("#CD5C5C");
+		mars.setBorderColorHex("#F08080");
 		
 		components.add(earth);
 		components.add(mars);

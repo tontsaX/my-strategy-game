@@ -15,6 +15,7 @@ public class GamePanel extends JPanel {
 
 	private LinkedList<GameComponent> gameComponents;
 	
+	// muista grid layout
 	public GamePanel() {
 		gameComponents = new LinkedList<>();
 	}

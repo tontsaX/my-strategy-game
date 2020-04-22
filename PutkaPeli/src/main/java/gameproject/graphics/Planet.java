@@ -1,6 +1,5 @@
 package gameproject.graphics;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Shape;
 import java.awt.geom.Ellipse2D;
@@ -24,7 +23,7 @@ public class Planet extends GameObject {
 	@Override
 	public void render(Graphics g) {
 		if(selected) {
-			g.setColor(Color.cyan);
+			g.setColor(borderColor);
 			g.fillOval(borderX, borderY, borderW, borderH);
 		}
 		g.setColor(color);
