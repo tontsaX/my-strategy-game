@@ -34,6 +34,7 @@ public class GameWindow extends JFrame {
 		scrollPane.getViewport().add(game);
 		scrollPane.getViewport().setDoubleBuffered(true);
 		scrollPane.setDoubleBuffered(true);
+		scrollPane.setIgnoreRepaint(true);
 		
         //scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		

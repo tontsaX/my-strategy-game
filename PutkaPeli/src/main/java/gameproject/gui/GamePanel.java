@@ -40,9 +40,9 @@ public class GamePanel extends JPanel {
 	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		graphics.setColor(Color.black);
+		//graphics.setColor(Color.black);
 		//graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
-		graphics.fillRect(0, 0, 1200, 900);
+		//graphics.fillRect(0, 0, 1200, 900);
 
 		for(GameComponent gameComponent: gameComponents) {
 			gameComponent.render(graphics);
