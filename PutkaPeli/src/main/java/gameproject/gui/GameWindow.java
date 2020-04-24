@@ -3,6 +3,7 @@ package gameproject.gui;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JScrollPane;
 
 public class GameWindow extends JFrame {
 
@@ -25,7 +26,12 @@ public class GameWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setIgnoreRepaint(true);
 		
-		add(game);
+		JScrollPane scrollPane = new JScrollPane(game);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		//add(game);
+		getContentPane().add(scrollPane);
 		
 		setVisible(true);
 	}

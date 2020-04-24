@@ -1,5 +1,6 @@
 package gameproject;
 
+import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -142,7 +143,9 @@ public class Game implements Runnable {
 	//----------------------------------------------------
 	private void createGameScreen() {
 		gamePanel = new GamePanel();
+		gamePanel.setPreferredSize(new Dimension(1200, 900));
 		gamePanel.addMouseListener(mouse);
+		  
 	}
 	
 	private void createGameWindow(String title) {
