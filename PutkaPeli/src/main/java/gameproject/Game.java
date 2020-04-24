@@ -1,6 +1,7 @@
 package gameproject;
 
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -41,9 +42,9 @@ public class Game implements Runnable {
 		
 		handler = new Handler(createGameComponents());
 		
-		createGameScreen();
+		initializeGameScreen();
 		
-		createGameWindow(title);
+		initializeGameWindow(title);
 	}
 	
 	private LinkedList<GameComponent> createGameComponents() {
@@ -141,14 +142,14 @@ public class Game implements Runnable {
 		gamePanel.repaint();
 	}
 	//----------------------------------------------------
-	private void createGameScreen() {
+	private void initializeGameScreen() {
 		gamePanel = new GamePanel();
 		gamePanel.setPreferredSize(new Dimension(1200, 900));
 		gamePanel.addMouseListener(mouse);
 		  
 	}
 	
-	private void createGameWindow(String title) {
+	private void initializeGameWindow(String title) {
 		gameWindow = new GameWindow(gamePanel, title);
 		
 		gameWindow.addWindowListener(new WindowAdapter() {
@@ -157,5 +158,7 @@ public class Game implements Runnable {
 				console.exitSystem();
 			}
 		});
+		
+		gameWindow.setVisible(true);
 	}
 }
