@@ -40,22 +40,16 @@ public class Game implements Runnable {
 		
 		handler = new Handler(createGameComponents());
 		
-		gamePanel = new GamePanel();
-		gamePanel.addMouseListener(mouse);
+		createGameScreen();
 		
-		gameWindow = new GameWindow(gamePanel, title);
-		gameWindow.addWindowListener(new WindowAdapter() {
-			public void windowClosing(WindowEvent windowEvent) {
-				console.exitSystem();
-			}
-		});
+		createGameWindow(title);
 	}
 	
 	private LinkedList<GameComponent> createGameComponents() {
 		LinkedList<GameComponent> components = new LinkedList<>();
 		
 		// Planet(coordinates x y, width, height, velocity/speed x y)
-		Planet earth = new Planet(288, 208, 50, 50, 0, 0);
+		Planet earth = new Planet(1100, 800, 50, 50, 0, 0);
 		Planet mars = new Planet(133, 150, 40, 40, 0, 0);
 		
 		earth.setColorHex("#1E90FF");
@@ -146,5 +140,19 @@ public class Game implements Runnable {
 		gamePanel.repaint();
 	}
 	//----------------------------------------------------
+	private void createGameScreen() {
+		gamePanel = new GamePanel();
+		gamePanel.addMouseListener(mouse);
+	}
 	
+	private void createGameWindow(String title) {
+		gameWindow = new GameWindow(gamePanel, title);
+		
+		gameWindow.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent windowEvent) {
+				console.exitSystem();
+			}
+		});
+	}
 }

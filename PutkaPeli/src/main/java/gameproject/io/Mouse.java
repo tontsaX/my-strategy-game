@@ -1,5 +1,6 @@
 package gameproject.io;
 
+import java.awt.Point;
 import java.awt.event.MouseAdapter; // kevyempi kuin swing kirjastosta. ei huomattavaa eroa, mutta kevyempi
 import java.awt.event.MouseEvent;
 
@@ -19,10 +20,16 @@ public class Mouse extends MouseAdapter {
 		clicked = false;
 	}
 	
+	@Override
 	public void mouseClicked(MouseEvent e) {
 		clicked = true;
 		x = e.getX();
 		y = e.getY();
+	}
+	
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		
 	}
 	
 	public int getX() {

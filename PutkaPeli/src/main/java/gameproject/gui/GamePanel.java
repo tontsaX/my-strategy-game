@@ -20,7 +20,6 @@ public class GamePanel extends JPanel {
 		gameComponents = new LinkedList<>();
 	}
 	
-	// Connects this component to a native screen resource
 	@Override
 	public void addNotify() {
 		super.addNotify();
@@ -39,7 +38,8 @@ public class GamePanel extends JPanel {
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
 		graphics.setColor(Color.black);
-		graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
+		//graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
+		graphics.fillRect(0, 0, 1200, 900);
 
 		for(GameComponent gameComponent: gameComponents) {
 			gameComponent.render(graphics);
