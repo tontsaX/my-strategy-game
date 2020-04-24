@@ -1,10 +1,13 @@
 package gameproject.gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
+import javax.swing.Scrollable;
 
 import gameproject.graphics.GameComponent;
 
@@ -45,4 +48,5 @@ public class GamePanel extends JPanel {
 			gameComponent.render(graphics);
 		}
 	}
+	
 }

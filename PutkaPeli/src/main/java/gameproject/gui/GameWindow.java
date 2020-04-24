@@ -1,10 +1,11 @@
 package gameproject.gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
+import javax.swing.JViewport;
 
 public class GameWindow extends JFrame {
 
@@ -28,9 +29,13 @@ public class GameWindow extends JFrame {
 		setIgnoreRepaint(true);
 		
 		// outo lag ja jos lisää layoutin, niin koko homma menee rikki
-		JScrollPane scrollPane = new JScrollPane(game);
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);  
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		JScrollPane scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//scrollPane.getViewport().setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		scrollPane.getViewport().add(game);
+		scrollPane.getViewport().setDoubleBuffered(true);
+		scrollPane.setDoubleBuffered(true);
+		
+        //scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		
 		//add(game);
 		add(scrollPane);
