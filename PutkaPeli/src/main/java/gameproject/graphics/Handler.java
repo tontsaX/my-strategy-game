@@ -38,7 +38,7 @@ public class Handler {
 		}
 	}
 
-	public void makeSelected(int x, int y) {
+	public void makeGameComponentSelected(int x, int y) {
 		for(GameComponent go: components) {
 			if(go.getBounds().contains(x, y)) {
 				go.isSelected(true);

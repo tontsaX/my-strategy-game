@@ -1,7 +1,6 @@
 package gameproject;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -119,14 +118,12 @@ public class Game implements Runnable {
 	
 	private void userInput() {
 		if(mouse.clicked()) {
-			// käytä contains(x,y) metodia klikkauksen tarkastukseen mieluummin kuin intersects()
-			// contains(x,y) tarkistaa, jos sille annetut koordinaatit ovat muodon sisällä
-			// johtaa tarkempaan valitsemistoimintaan ja poistaa mahdollisuuden valita muoto sen rajojen ulkopuolelta
 			console.print("Clicked (" 
 					+ mouse.getX() + ", "
 					+ mouse.getY() + ")");
-			handler.makeSelected(mouse.getX(), mouse.getY());
+			handler.makeGameComponentSelected(mouse.getX(), mouse.getY());
 		}
+		//if(mouse.)
 	}
 	
 	private void update() {
