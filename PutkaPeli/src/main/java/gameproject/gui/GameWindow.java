@@ -19,28 +19,26 @@ public class GameWindow extends JFrame {
 	
 	public GameWindow(GamePanel game, String title) {
 		setTitle(title);
-		setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		setMaximumSize(new Dimension(WIDTH, HEIGHT));
-		setMinimumSize(new Dimension(WIDTH, HEIGHT));
+		Dimension frameSize = new Dimension(WIDTH, HEIGHT);
+		setPreferredSize(frameSize);
+		setMaximumSize(frameSize);
+		setMinimumSize(frameSize);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setLocationRelativeTo(null);
 		setIgnoreRepaint(true);
 		
-		// outo lag ja jos lisää layoutin, niin koko homma menee rikki
-		JScrollPane scrollPane = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		//scrollPane.getViewport().setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		scrollPane.getViewport().add(game);
-		scrollPane.getViewport().setDoubleBuffered(true);
-		scrollPane.setDoubleBuffered(true);
-		scrollPane.setIgnoreRepaint(true);
+		// outo lag
+		JScrollPane scrollPane = new JScrollPane(game);
+		scrollPane.getViewport().setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
         //scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
 		
 		//add(game);
 		add(scrollPane);
-		
 		//setVisible(true);
 	}
 }

@@ -52,4 +52,9 @@ public class GamePanel extends JPanel {
 		graphics.dispose();
 	}
 	
+	// from scrollable demo
+	public Dimension getPreferredScrollableViewportSize() {
+        return new Dimension(GameWindow.WIDTH, GameWindow.WIDTH);
+    }
+	
 }

@@ -89,30 +89,37 @@ public class Game implements Runnable {
 	private void gameLoop() {
 		running = true;
 		
-		double previousTime = console.time();
-		double lag = 0.0;
+//		double previousTime = console.time();
+//		double lag = 0.0;
 		
 		while(running) {
-			double currentTime = console.time();
-			double elapsedTime = currentTime - previousTime;
-			previousTime = currentTime;
-			lag += elapsedTime;
+//			double currentTime = console.time();
+//			double elapsedTime = currentTime - previousTime;
+//			previousTime = currentTime;
+//			lag += elapsedTime;
 
 			userInput();
 			
-			while(lag >= MS_PER_UPDATE) {
+//			while(lag >= MS_PER_UPDATE) {
 				update();
-				lag -= MS_PER_UPDATE;
-			}
+//				lag -= MS_PER_UPDATE;
+//			}
 			
 			// the lag velocity is under 1, so right now with Graphics its makes no difference
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
-			catchLag(lag / MS_PER_UPDATE);
+//			catchLag(lag / MS_PER_UPDATE);
 			render();
 
 			// important for unix-devices. Needs to be as the last step of the game loop
 			TOOLKIT.sync(); 
+			
+			try {
+				Thread.sleep(16);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
 		console.exitSystem();
