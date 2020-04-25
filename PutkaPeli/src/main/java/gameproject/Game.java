@@ -24,7 +24,8 @@ public class Game implements Runnable {
 	
 	private static final int MILLISECONDS = 1000;
 	private static final int FPS = 60;
-	private static final double MS_PER_UPDATE = MILLISECONDS / FPS;
+	//private static final double MS_PER_UPDATE = MILLISECONDS / FPS;
+	private static final long MS_PER_UPDATE = MILLISECONDS / FPS;
 	
 	private IO console;
 	private Mouse mouse;
@@ -115,9 +116,8 @@ public class Game implements Runnable {
 			TOOLKIT.sync(); 
 			
 			try {
-				Thread.sleep(16);
+				Thread.sleep(MS_PER_UPDATE);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
