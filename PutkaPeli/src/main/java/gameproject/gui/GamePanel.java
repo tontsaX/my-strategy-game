@@ -47,6 +47,8 @@ public class GamePanel extends JPanel {
 		for(GameComponent gameComponent: gameComponents) {
 			gameComponent.render(graphics);
 		}
+		
+		graphics.dispose();
 	}
 	
 }
