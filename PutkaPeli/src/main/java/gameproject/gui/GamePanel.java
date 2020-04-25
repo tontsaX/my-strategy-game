@@ -20,6 +20,7 @@ public class GamePanel extends JPanel {
 	
 	// muista grid layout
 	public GamePanel() {
+		super();
 		gameComponents = new LinkedList<>();
 	}
 	
@@ -43,7 +44,7 @@ public class GamePanel extends JPanel {
 		//graphics.setColor(Color.black);
 		//graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
 		//graphics.fillRect(0, 0, 1200, 900);
-
+		
 		for(GameComponent gameComponent: gameComponents) {
 			gameComponent.render(graphics);
 		}

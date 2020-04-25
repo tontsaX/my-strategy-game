@@ -2,6 +2,7 @@ package gameproject;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -124,7 +125,7 @@ public class Game implements Runnable {
 					+ mouse.getY() + ")");
 			handler.makeGameComponentSelected(mouse.getX(), mouse.getY());
 		}
-		//if(mouse.)
+		//if(mouse.) // for dragged functionality
 	}
 	
 	private void update() {
@@ -142,6 +143,7 @@ public class Game implements Runnable {
 	//----------------------------------------------------
 	private void initializeGameScreen() {
 		gamePanel = new GamePanel();
+		gamePanel.setLayout(new FlowLayout());
 		gamePanel.setPreferredSize(new Dimension(1200, 900));
 		gamePanel.setBackground(Color.black);
 		//gamePanel.addMouseListener(mouse);
