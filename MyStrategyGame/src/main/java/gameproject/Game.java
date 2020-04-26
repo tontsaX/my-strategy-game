@@ -26,8 +26,7 @@ public class Game implements Runnable {
 	
 	private static final int MILLISECONDS = 1000;
 	private static final int FPS = 60;
-	//private static final double MS_PER_UPDATE = MILLISECONDS / FPS;
-	private static final long MS_PER_UPDATE = MILLISECONDS / FPS;
+	private static final double MS_PER_UPDATE = MILLISECONDS / FPS;
 	
 	private IO console;
 	private Mouse mouse;
