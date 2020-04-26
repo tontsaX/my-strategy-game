@@ -73,14 +73,14 @@ public class Game implements Runnable {
 			if(animator == null || !running) {	
 				animator = new Thread(this);
 				animator.start();
-				System.out.println("Animator created and the thread name is " + Thread.currentThread().getName());
+				Machine.printCurrentThreadName("Animator created and the thread name is ");
 			}
 		}
 	}
 	
 	public void stopGame() {
 		running = false;
-		System.out.println("Game stopped.");
+		console.print("Game stopped.");
 	}
 	
 	// ------GAME LOOP--------------------------------
@@ -91,7 +91,7 @@ public class Game implements Runnable {
 	
 	private void gameLoop() {
 		running = true;
-		System.out.println("Animator set to run and the thread name is " + Thread.currentThread().getName());
+		Machine.printCurrentThreadName("Animator set to run and the thread name is ");
 		
 		double previousTime = console.time();
 		double lag = 0.0;
@@ -122,7 +122,7 @@ public class Game implements Runnable {
 	
 	private void userInput() {
 		if(mouse.clicked()) {
-			System.out.println("Mouse clicked, we are in Game and the thread name is " + Thread.currentThread().getName());
+			Machine.printCurrentThreadName("Mouse clicked, we are in Game and the thread name is ");
 			console.print("Clicked (" 
 					+ mouse.getX() + ", "
 					+ mouse.getY() + ")");

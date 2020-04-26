@@ -7,6 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
+import gameproject.io.Machine;
+
 public class GameWindow extends JFrame {
 	/**
 	 * default serial, something about using correct Seriazable objects
@@ -35,6 +37,7 @@ public class GameWindow extends JFrame {
 
 		add(scrollPane);
 		setVisible(true);
-		System.out.println("GameWindow created and the thread name is " + Thread.currentThread().getName());
+		
+		Machine.printCurrentThreadName("GameWindow created and the thread name is ");
 	}
 }
