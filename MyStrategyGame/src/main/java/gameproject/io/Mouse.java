@@ -1,23 +1,14 @@
 package gameproject.io;
 
-import java.awt.Rectangle;
+import java.awt.Point;
 import java.awt.event.MouseAdapter; // kevyempi kuin swing kirjastosta. ei huomattavaa eroa, mutta kevyempi
 import java.awt.event.MouseEvent;
 
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-
 public class Mouse extends MouseAdapter {
-
-	/* Toiminta-idea
-	 * Klikatessa näytölle piirtyy näkymätön tai hyvin pieni muoto,
-	 * jonka avulla voidaan tarkistaa risteävätkö juuri piirretty muoto
-	 * ja klikkauksen alueella oleva muoto. Kun muodot risteävät on true,
-	 * niin se tarkoittaa, että muoto on valittu.
-	 * */
 	
-	private int x, y;
-	private boolean clicked, dragged;
+	//private volatile int x, y;
+	private volatile Point point;
+	private volatile boolean clicked, dragged;
 	
 	public Mouse() {
 		clicked = false;
@@ -26,8 +17,7 @@ public class Mouse extends MouseAdapter {
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		clicked = true;
-		x = e.getX();
-		y = e.getY();
+		point = new Point(e.getX(), e.getY());
 		System.out.println("Mouse clicked and the thread name is " + Thread.currentThread().getName());
 	}
 	
@@ -41,14 +31,18 @@ public class Mouse extends MouseAdapter {
 		dragged = false;
 	}
 	
+	public Point getPoint() {
+		return point;
+	}
+	
 	public int getX() {
 		clicked = false;
-		return x;
+		return point.x;
 	}
 	
 	public int getY() {
 		clicked = false;
-		return y;
+		return point.y;
 	}
 	
 	public boolean clicked() {
