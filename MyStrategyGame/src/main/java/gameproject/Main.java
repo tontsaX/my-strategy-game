@@ -7,7 +7,7 @@ public class Main {
 	}
 	
 	public static void newGame() {
-		Game game = new Game("My Game");
+		Game game = new Game("My Strategy Game");
 		game.startGame();
 	}
 	
