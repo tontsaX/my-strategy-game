@@ -10,12 +10,13 @@ import javax.swing.JPanel;
 
 import gameproject.graphics.GameComponent;
 
-public class GamePanel extends JPanel {
+public class GamePanel extends JPanel implements Runnable {
 
 	private static final long serialVersionUID = 1L;
 	private boolean addedToFrame = false;
 
 	private LinkedList<GameComponent> gameComponents;
+	private Thread animator;
 	
 	// muista grid layout
 	public GamePanel() {
@@ -51,5 +52,15 @@ public class GamePanel extends JPanel {
 	public Dimension getPreferredScrollableViewportSize() {
         return new Dimension(GameWindow.WIDTH, GameWindow.WIDTH);
     }
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	public void startAnimator() {
+		
+	}
 	
 }
