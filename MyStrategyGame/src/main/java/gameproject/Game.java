@@ -105,7 +105,7 @@ public class Game implements Runnable {
 			userInput();
 			
 			while(lag >= MS_PER_UPDATE) {
-				update();
+				updateGameObjects();
 				lag -= MS_PER_UPDATE;
 			}
 			
@@ -131,7 +131,7 @@ public class Game implements Runnable {
 		//if(mouse.) // for dragged functionality
 	}
 	
-	private void update() {
+	private void updateGameObjects() {
 		handler.updateGameComponents();
 	}
 	
