@@ -7,7 +7,6 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
-import javax.swing.Scrollable;
 
 import gameproject.graphics.GameComponent;
 
@@ -20,14 +19,7 @@ public class GamePanel extends JPanel {
 	
 	// muista grid layout
 	public GamePanel() {
-		super();
 		gameComponents = new LinkedList<>();
-	}
-	
-	@Override
-	public void addNotify() {
-		super.addNotify();
-		addedToFrame = true;
 	}
 	
 	public boolean readyToLaunch() {
@@ -39,11 +31,14 @@ public class GamePanel extends JPanel {
 	}
 	
 	@Override
+	public void addNotify() {
+		super.addNotify();
+		addedToFrame = true;
+	}
+	
+	@Override
 	public void paintComponent(Graphics graphics) {
 		super.paintComponent(graphics);
-		//graphics.setColor(Color.black);
-		//graphics.fillRect(0, 0, GameWindow.WIDTH, GameWindow.HEIGHT);
-		//graphics.fillRect(0, 0, 1200, 900);
 		
 		for(GameComponent gameComponent: gameComponents) {
 			gameComponent.render(graphics);

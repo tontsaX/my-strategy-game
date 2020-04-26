@@ -28,6 +28,7 @@ public class Mouse extends MouseAdapter {
 		clicked = true;
 		x = e.getX();
 		y = e.getY();
+		System.out.println("Mouse clicked and the thread name is " + Thread.currentThread().getName());
 	}
 	
 	@Override

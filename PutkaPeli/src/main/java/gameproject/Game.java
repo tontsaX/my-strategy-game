@@ -72,6 +72,7 @@ public class Game implements Runnable {
 			if(animator == null || !running) {	
 				animator = new Thread(this);
 				animator.start();
+				System.out.println("Animator created and the thread name is " + Thread.currentThread().getName());
 			}
 		}
 	}
@@ -89,6 +90,7 @@ public class Game implements Runnable {
 	
 	private void gameLoop() {
 		running = true;
+		System.out.println("Animator set to run and the thread name is " + Thread.currentThread().getName());
 		
 //		double previousTime = console.time();
 //		double lag = 0.0;
@@ -127,6 +129,7 @@ public class Game implements Runnable {
 	
 	private void userInput() {
 		if(mouse.clicked()) {
+			System.out.println("Mouse clicked, we are in Game and the thread name is " + Thread.currentThread().getName());
 			console.print("Clicked (" 
 					+ mouse.getX() + ", "
 					+ mouse.getY() + ")");
@@ -151,22 +154,22 @@ public class Game implements Runnable {
 	
 	private void initializeGameScreen() {
 		gamePanel = new GamePanel();
-		gamePanel.setLayout(new FlowLayout());
-		gamePanel.setPreferredSize(new Dimension(1200, 900));
+		//gamePanel.setLayout(new FlowLayout());
+		gamePanel.setPreferredSize(new Dimension(1800, 1348));
 		gamePanel.setBackground(Color.black);
 		gamePanel.addMouseListener(mouse);
 	}
 	
 	private void initializeGameWindow(String title) {
 		gameWindow = new GameWindow(gamePanel, title);
-		
+		/*
 		gameWindow.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent windowEvent) {
 				console.exitSystem();
 			}
 		});
+		*/
 		
-		gameWindow.setVisible(true);
 	}
 }

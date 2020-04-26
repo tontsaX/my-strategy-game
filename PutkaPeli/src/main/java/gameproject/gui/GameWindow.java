@@ -14,8 +14,8 @@ public class GameWindow extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public static final int WIDTH = 720; // 1080
-	public static final int HEIGHT = 454; // 680
+	public static final int WIDTH = 1080; //  720
+	public static final int HEIGHT = 680; //  454
 	
 	public GameWindow(GamePanel game, String title) {
 		setTitle(title);
@@ -39,6 +39,7 @@ public class GameWindow extends JFrame {
 		
 		//add(game);
 		add(scrollPane);
-		//setVisible(true);
+		setVisible(true);
+		System.out.println("GameWindow created and the thread name is " + Thread.currentThread().getName());
 	}
 }
