@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 import gameproject.graphics.GameComponent;
 
-public class GamePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel /*implements Runnable*/ {
 
 	private static final long serialVersionUID = 1L;
 	private boolean addedToFrame = false;
@@ -53,17 +53,17 @@ public class GamePanel extends JPanel implements Runnable {
         return new Dimension(GameWindow.WIDTH, GameWindow.WIDTH);
     }
 
-	@Override
-	public void run() {
-		// repaint juttuja tänne
-		
-	}
-	
-	public void startAnimator() {
-		if(animator != null) {
-			animator = new Thread(this);
-			animator.start();
-		}
-	}
+//	@Override
+//	public void run() {
+//		// repaint juttuja tänne
+//		
+//	}
+//	
+//	public void startAnimator() {
+//		if(animator != null) {
+//			animator = new Thread(this);
+//			animator.start();
+//		}
+//	}
 	
 }

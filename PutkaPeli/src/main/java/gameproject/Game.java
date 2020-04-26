@@ -115,15 +115,7 @@ public class Game implements Runnable {
 			// if it'd be Graphics2D, then it'd be useful
 			catchLag(lag / MS_PER_UPDATE);
 			render();
-
-			// important for unix-devices. Needs to be as the last step of the game loop
-			TOOLKIT.sync(); 
-			
-//			try {
-//				Thread.sleep(MS_PER_UPDATE);
-//			} catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
+	
 		}
 		
 		console.exitSystem();
@@ -150,14 +142,13 @@ public class Game implements Runnable {
 	
 	private void render() {
 		SwingUtilities.invokeLater(new Runnable() {
-
 			@Override
 			public void run() {
 				gamePanel.setGameComponents(handler.getGameComponents());
 				gamePanel.repaint();
 			}
 		});
-		
+		TOOLKIT.sync(); 
 	}
 	//----------------------------------------------------
 	
@@ -171,14 +162,5 @@ public class Game implements Runnable {
 	
 	private void initializeGameWindow(String title) {
 		gameWindow = new GameWindow(gamePanel, title);
-		/*
-		gameWindow.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosing(WindowEvent windowEvent) {
-				console.exitSystem();
-			}
-		});
-		*/
-		
 	}
 }
