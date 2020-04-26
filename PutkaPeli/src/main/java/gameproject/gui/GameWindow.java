@@ -8,7 +8,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JViewport;
 
 public class GameWindow extends JFrame {
-
 	/**
 	 * default serial, something about using correct Seriazable objects
 	 */
@@ -29,15 +28,11 @@ public class GameWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setIgnoreRepaint(true);
 		
-		// outo lag
 		JScrollPane scrollPane = new JScrollPane(game);
 		scrollPane.getViewport().setPreferredSize(new Dimension(WIDTH, HEIGHT));
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		
-        //scrollPane.getViewport().setScrollMode(JViewport.SIMPLE_SCROLL_MODE);
-		
-		//add(game);
+
 		add(scrollPane);
 		setVisible(true);
 		System.out.println("GameWindow created and the thread name is " + Thread.currentThread().getName());

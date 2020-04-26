@@ -8,6 +8,8 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
+import javax.swing.SwingUtilities;
+
 import gameproject.graphics.GameComponent;
 import gameproject.graphics.Handler;
 import gameproject.graphics.Planet;
@@ -92,36 +94,36 @@ public class Game implements Runnable {
 		running = true;
 		System.out.println("Animator set to run and the thread name is " + Thread.currentThread().getName());
 		
-//		double previousTime = console.time();
-//		double lag = 0.0;
+		double previousTime = console.time();
+		double lag = 0.0;
 		
 		while(running) {
-//			double currentTime = console.time();
-//			double elapsedTime = currentTime - previousTime;
-//			previousTime = currentTime;
-//			lag += elapsedTime;
+			double currentTime = console.time();
+			double elapsedTime = currentTime - previousTime;
+			previousTime = currentTime;
+			lag += elapsedTime;
 
 			userInput();
 			
-//			while(lag >= MS_PER_UPDATE) {
+			while(lag >= MS_PER_UPDATE) {
 				update();
-//				lag -= MS_PER_UPDATE;
-//			}
+				lag -= MS_PER_UPDATE;
+			}
 			
 			// the lag velocity is under 1, so right now with Graphics its makes no difference
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
-//			catchLag(lag / MS_PER_UPDATE);
-			//render();
+			catchLag(lag / MS_PER_UPDATE);
+			render();
 
 			// important for unix-devices. Needs to be as the last step of the game loop
 			TOOLKIT.sync(); 
 			
-			try {
-				Thread.sleep(MS_PER_UPDATE);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
+//			try {
+//				Thread.sleep(MS_PER_UPDATE);
+//			} catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
 		}
 		
 		console.exitSystem();
@@ -147,8 +149,15 @@ public class Game implements Runnable {
 	}
 	
 	private void render() {
-		gamePanel.setGameComponents(handler.getGameComponents());
-		gamePanel.repaint();
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				gamePanel.setGameComponents(handler.getGameComponents());
+				gamePanel.repaint();
+			}
+		});
+		
 	}
 	//----------------------------------------------------
 	
