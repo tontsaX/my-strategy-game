@@ -6,7 +6,6 @@ import java.awt.event.MouseEvent;
 
 public class Mouse extends MouseAdapter {
 	
-	//private volatile int x, y;
 	private volatile Point point;
 	private volatile boolean clicked, dragged;
 	
