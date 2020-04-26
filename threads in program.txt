@@ -7,3 +7,8 @@ Clicked (417, 218)
 
 Animator thread handles the commands to make game and handler
 to update game objects and make GamePanel to repaint.
+
+Remember Swing utilities invokeLater(Runnable) method when updating the
+swing thread. Swing thread should always be updated in event thread.
+Remember Swing Worker for doing big calculations when an event is launched.
+Never do big computing like retrieving info from database in an event thread! 
