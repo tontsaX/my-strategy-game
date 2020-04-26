@@ -148,13 +148,13 @@ public class Game implements Runnable {
 		gamePanel.repaint();
 	}
 	//----------------------------------------------------
+	
 	private void initializeGameScreen() {
 		gamePanel = new GamePanel();
 		gamePanel.setLayout(new FlowLayout());
 		gamePanel.setPreferredSize(new Dimension(1200, 900));
 		gamePanel.setBackground(Color.black);
-		//gamePanel.addMouseListener(mouse);
-		  
+		gamePanel.addMouseListener(mouse);
 	}
 	
 	private void initializeGameWindow(String title) {
