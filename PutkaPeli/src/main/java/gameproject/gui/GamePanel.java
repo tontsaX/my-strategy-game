@@ -55,12 +55,15 @@ public class GamePanel extends JPanel implements Runnable {
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
+		// repaint juttuja tänne
 		
 	}
 	
 	public void startAnimator() {
-		
+		if(animator != null) {
+			animator = new Thread(this);
+			animator.start();
+		}
 	}
 	
 }
