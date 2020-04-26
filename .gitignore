@@ -1,6 +1,0 @@
-#ignore generated tmp files
-*.tmp
-#ignore directory build
-build/
-#ignore directory .gradle
-.gradle/
