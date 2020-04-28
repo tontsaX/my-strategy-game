@@ -2,6 +2,7 @@ package gameproject;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 
@@ -123,7 +124,10 @@ public class Game implements Runnable {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					gamePanel.scrollRectToVisible(mouse.getDraggedView());
+					mouse.setViewport(gamePanel.getViewport());
+					if(mouse.getDraggedView() != null) {
+						gamePanel.scrollRectToVisible(mouse.getDraggedView());
+					}
 				}				
 			});
 		}

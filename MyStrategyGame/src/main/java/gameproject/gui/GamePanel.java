@@ -7,6 +7,8 @@ import java.awt.Rectangle;
 import java.util.LinkedList;
 
 import javax.swing.JPanel;
+import javax.swing.JViewport;
+import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
 
@@ -51,6 +53,10 @@ public class GamePanel extends JPanel /*implements Runnable*/ {
 	// from scrollable demo
 	public Dimension getPreferredScrollableViewportSize() {
         return new Dimension(GameWindow.WIDTH, GameWindow.WIDTH);
+    }
+	
+	public JViewport getViewport() {
+    	return (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, this);
     }
 
 //	@Override
