@@ -9,5 +9,7 @@ and starting graphics handling.
 [Tutorialspoint Mouse Adapter example.](https://www.tutorialspoint.com/swing/swing_mouseadapter.htm)
 
 [How to use JScrollPane](https://docs.oracle.com/javase/tutorial/uiswing/components/scrollpane.html) by Oracle.
+[Scroll by dragging the panel](https://stackoverflow.com/questions/31171502/scroll-jscrollpane-by-dragging-mouse-java-swing) solution made by MadProgrammer.
 
 [Swing Tread Rules](https://www.youtube.com/watch?v=-5VSLCEnKCQ) by video2brain.
+

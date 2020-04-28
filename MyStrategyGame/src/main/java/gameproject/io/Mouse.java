@@ -1,33 +1,32 @@
 package gameproject.io;
 
 import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.event.MouseAdapter; // kevyempi kuin swing kirjastosta. ei huomattavaa eroa, mutta kevyempi
 import java.awt.event.MouseEvent;
 
 public class Mouse extends MouseAdapter {
 	
 	private volatile Point point;
-	private volatile boolean clicked, dragged;
+	private volatile boolean mouseClicked, mouseDragged;
+	private volatile Rectangle dragView;
 	
 	public Mouse() {
-		clicked = false;
+		mouseClicked = false;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		clicked = true;
-		point = new Point(e.getX(), e.getY());
-		System.out.println("Mouse clicked and the thread name is " + Thread.currentThread().getName());
+		mouseClicked = true;
+		point = e.getPoint();
+		Machine.printCurrentThreadName("Mouse clicked and the thread name is ");
 	}
 	
 	@Override
 	public void mouseDragged(MouseEvent e) {
-        dragged = true;
-	}
-	
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		dragged = false;
+		System.out.println("Mouse dragged.");
+        mouseDragged = true;
+        dragView = new Rectangle(e.getX(), e.getY(), 1,1);
 	}
 	
 	public Point getPoint() {
@@ -35,16 +34,25 @@ public class Mouse extends MouseAdapter {
 	}
 	
 	public int getX() {
-		clicked = false;
+		mouseClicked = false;
 		return point.x;
 	}
 	
 	public int getY() {
-		clicked = false;
+		mouseClicked = false;
 		return point.y;
 	}
 	
+	public Rectangle getDraggedView() {
+		mouseDragged = false;
+		return dragView;
+	}
+	
 	public boolean clicked() {
-		return clicked;
+		return mouseClicked;
+	}
+	
+	public boolean dragged() {
+		return mouseDragged;
 	}
 }

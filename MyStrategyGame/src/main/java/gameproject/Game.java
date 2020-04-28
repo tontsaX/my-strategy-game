@@ -2,12 +2,10 @@ package gameproject;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Toolkit;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.util.LinkedList;
 
+import javax.swing.JViewport;
 import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
@@ -121,6 +119,14 @@ public class Game implements Runnable {
 	}
 	
 	private void userInput() {
+		if(mouse.dragged()) {
+			SwingUtilities.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+					gamePanel.scrollRectToVisible(mouse.getDraggedView());
+				}				
+			});
+		}
 		if(mouse.clicked()) {
 			Machine.printCurrentThreadName("Mouse clicked, we are in Game and the thread name is ");
 			console.print("Clicked (" 
@@ -128,7 +134,7 @@ public class Game implements Runnable {
 					+ mouse.getY() + ")");
 			handler.makeGameComponentSelected(mouse.getX(), mouse.getY());
 		}
-		//if(mouse.) // for dragged functionality
+		
 	}
 	
 	private void updateGameObjects() {
@@ -147,7 +153,7 @@ public class Game implements Runnable {
 				gamePanel.repaint();
 			}
 		});
-		TOOLKIT.sync(); 
+		TOOLKIT.sync(); // for different systems to be able to handle the swing events correctly
 	}
 	//----------------------------------------------------
 	
@@ -156,7 +162,9 @@ public class Game implements Runnable {
 		//gamePanel.setLayout(new FlowLayout());
 		gamePanel.setPreferredSize(new Dimension(1800, 1348));
 		gamePanel.setBackground(Color.black);
+		gamePanel.setAutoscrolls(true);
 		gamePanel.addMouseListener(mouse);
+		gamePanel.addMouseMotionListener(mouse);
 	}
 	
 	private void initializeGameWindow(String title) {
