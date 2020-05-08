@@ -18,10 +18,14 @@ public class GamePanel extends JPanel /*implements Runnable*/ {
 	private boolean addedToFrame = false;
 
 	private LinkedList<GameComponent> gameComponents;
-	private Thread animator;
 	
 	// muista grid layout
 	public GamePanel() {
+		gameComponents = new LinkedList<>();
+	}
+	
+	public GamePanel(Dimension size) {
+		setSize(size);
 		gameComponents = new LinkedList<>();
 	}
 	
@@ -51,25 +55,17 @@ public class GamePanel extends JPanel /*implements Runnable*/ {
 	}
 	
 	// from scrollable demo
-	public Dimension getPreferredScrollableViewportSize() {
-        return new Dimension(GameWindow.WIDTH, GameWindow.WIDTH);
-    }
+//	public Dimension getPreferredScrollableViewportSize() {
+//        return new Dimension(GameWindow.WIDTH, GameWindow.WIDTH);
+//    }
+	
+	@Override
+	public Dimension getPreferredSize() {
+		return getSize();
+	}
 	
 	public JViewport getViewport() {
     	return (JViewport) SwingUtilities.getAncestorOfClass(JViewport.class, this);
     }
-
-//	@Override
-//	public void run() {
-//		// repaint juttuja tänne
-//		
-//	}
-//	
-//	public void startAnimator() {
-//		if(animator != null) {
-//			animator = new Thread(this);
-//			animator.start();
-//		}
-//	}
 	
 }

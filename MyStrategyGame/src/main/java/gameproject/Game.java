@@ -2,11 +2,11 @@ package gameproject;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 
-import javax.swing.JViewport;
+import javax.swing.JLayeredPane;
+import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
@@ -46,7 +46,7 @@ public class Game implements Runnable {
 		
 		initializeGameScreen();
 		
-		initializeGameWindow(title);
+//		initializeGameWindow(title);
 	}
 	
 	private LinkedList<GameComponent> createGameComponents() {
@@ -162,13 +162,27 @@ public class Game implements Runnable {
 	//----------------------------------------------------
 	
 	private void initializeGameScreen() {
-		gamePanel = new GamePanel();
-		//gamePanel.setLayout(new FlowLayout());
-		gamePanel.setPreferredSize(new Dimension(1800, 1348));
+		JLayeredPane gameLayers = new JLayeredPane();
+		gameLayers.setPreferredSize(new Dimension(1800, 1348));
+		
+		// background layer, sisältää planeetta- ja niiden reittianimaatiot
+		gamePanel = new GamePanel(new Dimension(1800, 1348)); 
 		gamePanel.setBackground(Color.black);
-		gamePanel.setAutoscrolls(true);
 		gamePanel.addMouseListener(mouse);
 		gamePanel.addMouseMotionListener(mouse);
+		
+		// sprite layer, käsittelee pieniä piirroksia kuten mahdolliset liikenuolet
+		
+		// game gui layer, minimap ja planeettojen tiedot ruudut 
+		
+		gameLayers.add(gamePanel, Integer.valueOf(1));
+
+		JScrollPane gameScreen = new JScrollPane(gameLayers);
+		gameScreen.getViewport().setPreferredSize(new Dimension(GameWindow.WIDTH, GameWindow.HEIGHT));
+		gameScreen.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		gameScreen.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+		
+		gameWindow = new GameWindow(gameScreen, "My Strategy Game");
 	}
 	
 	private void initializeGameWindow(String title) {

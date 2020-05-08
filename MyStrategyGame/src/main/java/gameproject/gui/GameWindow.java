@@ -1,11 +1,10 @@
 package gameproject.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
 
 import gameproject.io.Machine;
 
@@ -18,7 +17,7 @@ public class GameWindow extends JFrame {
 	public static final int WIDTH = 1080; //  720
 	public static final int HEIGHT = 680; //  454
 	
-	public GameWindow(GamePanel game, String title) {
+	public GameWindow(JComponent game, String title) {
 		setTitle(title);
 		Dimension frameSize = new Dimension(WIDTH, HEIGHT);
 		setPreferredSize(frameSize);
@@ -30,12 +29,12 @@ public class GameWindow extends JFrame {
 		setLocationRelativeTo(null);
 		setIgnoreRepaint(true);
 		
-		JScrollPane scrollPane = new JScrollPane(game);
-		scrollPane.getViewport().setPreferredSize(new Dimension(WIDTH, HEIGHT));
-		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		JScrollPane scrollPane = new JScrollPane(game);
+//		scrollPane.getViewport().setPreferredSize(new Dimension(WIDTH, HEIGHT));
+//		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+//		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		add(scrollPane);
+		getContentPane().add(game);
 		setVisible(true);
 		
 		Machine.printCurrentThreadName("GameWindow created and the thread name is ");
