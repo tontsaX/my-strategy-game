@@ -2,6 +2,7 @@ package gameproject;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 
@@ -14,39 +15,35 @@ import gameproject.graphics.Handler;
 import gameproject.graphics.Planet;
 import gameproject.gui.GamePanel;
 import gameproject.gui.GameWindow;
+import gameproject.gui.GuiManager;
 import gameproject.io.IO;
 import gameproject.io.Machine;
 import gameproject.io.Mouse;
 
 // This class is responsible of running the game
 public class Game implements Runnable {
-
-	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 	
 	private static final int MILLISECONDS = 1000;
 	private static final int FPS = 60;
 	private static final double MS_PER_UPDATE = MILLISECONDS / FPS;
 	
 	private IO console;
-	private Mouse mouse;
 	
 	private Handler handler;
-	
-	private GamePanel gamePanel;
-	private GameWindow gameWindow;
+	private GuiManager guiManager;
 	
 	private Boolean running;
-	private Thread animator;
+	private Thread game;
 
 	public Game(String title) {
 		console = new Machine();
-		mouse = new Mouse();
 		
 		handler = new Handler(createGameComponents());
 		
-		initializeGameScreen();
+		guiManager = GuiManager.buildGame();
 	}
 	
+	// This will go to GameObjectManager
 	private LinkedList<GameComponent> createGameComponents() {
 		LinkedList<GameComponent> components = new LinkedList<>();
 		
@@ -66,18 +63,16 @@ public class Game implements Runnable {
 	}
 	
 	public void startGame() {
-		if(gamePanel.readyToLaunch()) {
-			if(animator == null || !running) {	
-				animator = new Thread(this);
-				animator.start();
-				Machine.printCurrentThreadName("Animator created and the thread name is ");
+		if(guiManager.gameReadyToLaunch()) {
+			if(game == null || !running) {	
+				game = new Thread(this);
+				game.start();
 			}
 		}
 	}
 	
 	public void stopGame() {
 		running = false;
-		console.print("Game stopped.");
 	}
 	
 	// ------GAME LOOP--------------------------------
@@ -88,7 +83,6 @@ public class Game implements Runnable {
 	
 	private void gameLoop() {
 		running = true;
-		Machine.printCurrentThreadName("Animator set to run and the thread name is ");
 		
 		double previousTime = console.time();
 		double lag = 0.0;
@@ -114,27 +108,17 @@ public class Game implements Runnable {
 	
 		}
 		
+		console.print("Game stopped.");
 		console.exitSystem();
 	}
 	
 	private void userInput() {
-		if(mouse.dragged()) {
-			SwingUtilities.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-					mouse.setViewport(gamePanel.getViewport());
-					if(mouse.getDraggedView() != null) {
-						gamePanel.scrollRectToVisible(mouse.getDraggedView());
-					}
-				}				
-			});
+		if(guiManager.mouseDragged()) {
+			guiManager.scrollToView();
 		}
-		if(mouse.clicked()) {
-			Machine.printCurrentThreadName("Mouse clicked, we are in Game and the thread name is ");
-			console.print("Clicked (" 
-					+ mouse.getX() + ", "
-					+ mouse.getY() + ")");
-			handler.makeGameComponentSelected(mouse.getX(), mouse.getY());
+		if(guiManager.mouseClicked()) {
+			Point point = guiManager.getClickedPoint();
+			handler.makeGameComponentSelected(point.x, point.y);
 		}
 		
 	}
@@ -148,37 +132,7 @@ public class Game implements Runnable {
 	}
 	
 	private void render() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				gamePanel.setGameComponents(handler.getGameComponents());
-				gamePanel.repaint();
-			}
-		});
-		TOOLKIT.sync(); // for different systems to be able to handle the swing events correctly
+		guiManager.repaintComponents(handler.getGameComponents());
 	}
-	//----------------------------------------------------
-	
-	private void initializeGameScreen() {
-		JLayeredPane gameLayers = new JLayeredPane();
-		gameLayers.setPreferredSize(new Dimension(1800, 1348));
-		
-		// background layer, sisältää planeetta- ja niiden reittianimaatiot
-		gamePanel = new GamePanel(new Dimension(1800, 1348)); 
-		gamePanel.setBackground(Color.black);
-		gamePanel.addMouseListener(mouse);
-		gamePanel.addMouseMotionListener(mouse);
-		
-		// sprite layer, käsittelee pieniä piirroksia kuten mahdolliset liikenuolet
-		
-		// game gui layer, minimap ja planeettojen tiedot ruudut 
-		
-		gameLayers.add(gamePanel, Integer.valueOf(1));
-
-		JScrollPane gameScreen = new JScrollPane(gameLayers);
-		gameScreen.getViewport().setPreferredSize(new Dimension(GameWindow.WIDTH, GameWindow.HEIGHT));
-//		gameScreen.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		gameWindow = new GameWindow(gameScreen, "My Strategy Game");
-	}
+	//---------------------------- end of game loop methods
 }
