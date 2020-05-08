@@ -45,8 +45,6 @@ public class Game implements Runnable {
 		handler = new Handler(createGameComponents());
 		
 		initializeGameScreen();
-		
-//		initializeGameWindow(title);
 	}
 	
 	private LinkedList<GameComponent> createGameComponents() {
@@ -183,9 +181,5 @@ public class Game implements Runnable {
 		gameScreen.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 		
 		gameWindow = new GameWindow(gameScreen, "My Strategy Game");
-	}
-	
-	private void initializeGameWindow(String title) {
-		gameWindow = new GameWindow(gamePanel, title);
 	}
 }
