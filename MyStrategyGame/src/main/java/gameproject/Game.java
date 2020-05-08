@@ -177,8 +177,7 @@ public class Game implements Runnable {
 
 		JScrollPane gameScreen = new JScrollPane(gameLayers);
 		gameScreen.getViewport().setPreferredSize(new Dimension(GameWindow.WIDTH, GameWindow.HEIGHT));
-		gameScreen.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		gameScreen.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//		gameScreen.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		
 		gameWindow = new GameWindow(gameScreen, "My Strategy Game");
 	}
