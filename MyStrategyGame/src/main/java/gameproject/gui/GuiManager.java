@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.util.LinkedList;
 
 import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
@@ -27,10 +28,13 @@ public class GuiManager {
 		gameLayers.setPreferredSize(new Dimension(1800, 1348));
 		
 		// background layer, sisältää planeetta- ja niiden reittianimaatiot
-		
+		JPanel backgroundLayer = new JPanel();
+		backgroundLayer.setSize(new Dimension(1800, 1348));
+		backgroundLayer.setBackground(Color.black);
+		backgroundLayer.setPreferredSize(new Dimension(1800, 1348));
 		// sprite layer, käsittelee pieniä piirroksia kuten mahdolliset liikenuolet
 		gamePanel = new GamePanel(new Dimension(1800, 1348)); 
-		gamePanel.setBackground(Color.black);
+		gamePanel.setOpaque(false);
 		
 		mouse = new Mouse();
 		gamePanel.addMouseListener(mouse);
@@ -38,9 +42,11 @@ public class GuiManager {
 		
 		// game gui layer, minimap ja planeettojen tiedot ruudut 
 		
-		gameLayers.add(gamePanel, Integer.valueOf(1));
+		gameLayers.add(backgroundLayer, Integer.valueOf(1));
+		gameLayers.add(gamePanel, Integer.valueOf(2));
 
 		JScrollPane gameScreen = new JScrollPane(gameLayers);
+		// leveyttä ja korkeutta tarttee vähän muokkailla
 		gameScreen.getViewport().setPreferredSize(new Dimension(GameWindow.WIDTH, GameWindow.HEIGHT));
 //		gameScreen.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		

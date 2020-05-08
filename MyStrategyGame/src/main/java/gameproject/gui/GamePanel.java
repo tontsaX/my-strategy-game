@@ -12,14 +12,13 @@ import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
 
-public class GamePanel extends JPanel /*implements Runnable*/ {
+public class GamePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private boolean addedToFrame = false;
 
 	private LinkedList<GameComponent> gameComponents;
 	
-	// muista grid layout
 	public GamePanel() {
 		gameComponents = new LinkedList<>();
 	}

@@ -19,10 +19,10 @@ public class GameWindow extends JFrame {
 	
 	public GameWindow(JComponent game, String title) {
 		setTitle(title);
-		Dimension frameSize = new Dimension(WIDTH, HEIGHT);
-		setPreferredSize(frameSize);
-		setMaximumSize(frameSize);
-		setMinimumSize(frameSize);
+//		Dimension frameSize = new Dimension(WIDTH, HEIGHT);
+//		setPreferredSize(frameSize);
+//		setMaximumSize(frameSize);
+//		setMinimumSize(frameSize);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -35,6 +35,7 @@ public class GameWindow extends JFrame {
 //		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
 		getContentPane().add(game);
+		pack();
 		setVisible(true);
 		
 		Machine.printCurrentThreadName("GameWindow created and the thread name is ");
