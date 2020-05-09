@@ -1,4 +1,4 @@
-package gameproject.gui;
+package gameproject.graphics.layers;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,18 +12,18 @@ import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
 
-public class GamePanel extends JPanel {
+public class SpriteLayer extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private boolean addedToFrame = false;
 
 	private LinkedList<GameComponent> gameComponents;
 	
-	public GamePanel() {
+	public SpriteLayer() {
 		gameComponents = new LinkedList<>();
 	}
 	
-	public GamePanel(Dimension size) {
+	public SpriteLayer(Dimension size) {
 		setSize(size);
 		gameComponents = new LinkedList<>();
 	}

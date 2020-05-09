@@ -13,7 +13,7 @@ import javax.swing.SwingUtilities;
 import gameproject.graphics.GameComponent;
 import gameproject.graphics.Handler;
 import gameproject.graphics.Planet;
-import gameproject.gui.GamePanel;
+import gameproject.graphics.layers.SpriteLayer;
 import gameproject.gui.GameWindow;
 import gameproject.gui.GuiManager;
 import gameproject.io.IO;
