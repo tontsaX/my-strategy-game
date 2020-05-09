@@ -1,17 +1,16 @@
 package gameproject.gui;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Toolkit;
 import java.util.LinkedList;
 
 import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
+import gameproject.graphics.layers.Background;
+import gameproject.graphics.layers.Layer;
 import gameproject.graphics.layers.SpriteLayer;
 import gameproject.io.Mouse;
 
@@ -19,45 +18,55 @@ public class GuiManager {
 	
 	private static final Toolkit TOOLKIT = Toolkit.getDefaultToolkit();
 	
-	
-	private SpriteLayer spriteLayer;
+	private Layer background, planetsLayer;
+	private JLayeredPane gameLayers;
 	private GameWindow gameWindow;
 	
 	private Mouse mouse;
 
 	private GuiManager() {
-		JLayeredPane gameLayers = new JLayeredPane();
-		gameLayers.setPreferredSize(new Dimension(1800, 1348));
+		setLayerContainer();
 		
-		// background layer, sisältää planeetta- ja niiden reittianimaatiot
-		JPanel backgroundLayer = new JPanel();
-		backgroundLayer.setSize(new Dimension(1800, 1348));
-		backgroundLayer.setBackground(Color.black);
-		backgroundLayer.setPreferredSize(new Dimension(1800, 1348));
+		createGameLayers();
 		
-		// sprite layer, käsittelee pieniä piirroksia kuten mahdolliset liikenuolet
-		spriteLayer = new SpriteLayer(new Dimension(1800, 1348)); 
-		spriteLayer.setOpaque(false);
+		assignActionListeners();
 		
-		mouse = new Mouse();
-		spriteLayer.addMouseListener(mouse);
-		spriteLayer.addMouseMotionListener(mouse);
+		assembleGameScreen();
 		
-		// game gui layer, minimap ja planeettojen tiedot ruudut 
-		
-		gameLayers.add(backgroundLayer, Integer.valueOf(1));
-		gameLayers.add(spriteLayer, Integer.valueOf(2));
-
-		JScrollPane gameScreen = new JScrollPane(gameLayers);
-		// leveyttä ja korkeutta tarttee vähän muokkailla
-		gameScreen.getViewport().setPreferredSize(new Dimension(1032, 650));
-//		gameScreen.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		
-		gameWindow = new GameWindow(gameScreen, "My Strategy Game");
+		addToGameWindow();
 	}
 	
-	private void initializeBackground() {
+	private void setLayerContainer() {
+		gameLayers = new JLayeredPane();
+		gameLayers.setPreferredSize(new Dimension((int)(GameWindow.GAME_WIDTH * 1.618 * 2), 
+												  (int)(GameWindow.GAME_HEIGHT * 1.618 * 2)));
+	}
+	
+	private void createGameLayers() {
+		// background layer, creates the background
+		background = new Background(gameLayers.getPreferredSize());
 		
+		// draws planets and their connections
+		planetsLayer = new SpriteLayer(gameLayers.getPreferredSize());
+		
+		// game gui layer, gameplayLayer, (minimap) and planet control
+		// new guiLayer
+	}
+	
+	private void assignActionListeners() {
+		mouse = new Mouse();
+		planetsLayer.addMouseListener(mouse);
+		planetsLayer.addMouseMotionListener(mouse);
+	}
+	
+	private void assembleGameScreen() {
+		gameLayers.add(background, Integer.valueOf(1));
+		gameLayers.add(planetsLayer, Integer.valueOf(2));
+		// gameLayers.add(guiLayer, Integer.valueOf(3));
+	}
+	
+	private void addToGameWindow() {
+		gameWindow = new GameWindow(gameLayers, "My Strategy Game");
 	}
 	
 	public static GuiManager buildGame() {
@@ -65,15 +74,15 @@ public class GuiManager {
 	}
 	
 	public boolean gameReadyToLaunch() {
-		return spriteLayer.readyToLaunch();
+		return planetsLayer.readyToLaunch();
 	}
 	
 	public void repaintComponents(LinkedList<GameComponent> gameComponents) {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				spriteLayer.setGameComponents(gameComponents);
-				spriteLayer.repaint();
+				planetsLayer.setGameComponents(gameComponents);
+				planetsLayer.repaint();
 			}
 		});
 		TOOLKIT.sync(); // for different systems to be able to handle the swing events correctly
@@ -99,9 +108,9 @@ public class GuiManager {
 		SwingUtilities.invokeLater(new Runnable() {
 			@Override
 			public void run() {
-				mouse.setViewport(spriteLayer.getViewport());
+				mouse.setViewport(planetsLayer.getViewport());
 				if(mouse.getDraggedView() != null) {
-					spriteLayer.scrollRectToVisible(mouse.getDraggedView());
+					planetsLayer.scrollRectToVisible(mouse.getDraggedView());
 				}
 			}				
 		});
