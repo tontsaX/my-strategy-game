@@ -17,7 +17,7 @@ import gameproject.graphics.layers.SpriteLayer;
 import gameproject.gui.GameWindow;
 import gameproject.gui.GuiManager;
 import gameproject.io.IO;
-import gameproject.io.Machine;
+import gameproject.io.Console;
 import gameproject.io.Mouse;
 
 // This class is responsible of running the game
@@ -36,7 +36,7 @@ public class Game implements Runnable {
 	private Thread game;
 
 	public Game(String title) {
-		console = new Machine();
+		console = new Console();
 		
 		handler = new Handler(createGameComponents());
 		

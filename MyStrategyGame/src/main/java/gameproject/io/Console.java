@@ -1,6 +1,6 @@
 package gameproject.io;
 
-public class Machine implements IO {
+public class Console implements IO {
 	
 	public static void printCurrentThreadName(String startSentence) {
 		System.out.println(startSentence + Thread.currentThread().getName());
