@@ -2,13 +2,12 @@ package gameproject.graphics;
 
 import java.util.LinkedList;
 
-// This class controls and updates game components
-public class Handler {
+public class GameObjectManager {
 	
 	// LinkedList is better for data manipulating than ArrayList
 	private LinkedList<GameComponent> components;
 	
-	public Handler(LinkedList<GameComponent> gameComponents) {
+	public GameObjectManager(LinkedList<GameComponent> gameComponents) {
 		components = gameComponents;
 	}
 	

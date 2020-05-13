@@ -2,7 +2,7 @@ package gameproject.graphics;
 
 public abstract class GameObject extends GameComponent {
 	
-	private final int orgVelX, orgVelY;
+	protected int orgVelX, orgVelY;
 	protected int velocityX, velocityY;
 
 	public GameObject(int x, int y, int width, int height, int velX, int velY) {

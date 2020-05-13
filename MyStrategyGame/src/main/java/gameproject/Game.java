@@ -11,7 +11,7 @@ import javax.swing.JScrollPane;
 import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
-import gameproject.graphics.Handler;
+import gameproject.graphics.GameObjectManager;
 import gameproject.graphics.Planet;
 import gameproject.graphics.layers.SpriteLayer;
 import gameproject.gui.GameWindow;
@@ -29,7 +29,7 @@ public class Game implements Runnable {
 	
 	private IO console;
 	
-	private Handler handler;
+	private GameObjectManager gameObjectManager;
 	private GuiManager guiManager;
 	
 	private Boolean running;
@@ -38,7 +38,7 @@ public class Game implements Runnable {
 	public Game(String title) {
 		console = new Console();
 		
-		handler = new Handler(createGameComponents());
+		gameObjectManager = new GameObjectManager(createGameComponents());
 		
 		guiManager = GuiManager.buildGame();
 	}
@@ -119,22 +119,22 @@ public class Game implements Runnable {
 		}
 		if(guiManager.mouseClicked()) {
 			Point point = guiManager.getClickedPoint();
-			handler.makeGameComponentSelected(point.x, point.y);
+			gameObjectManager.makeGameComponentSelected(point.x, point.y);
 		}
 		
 	}
 	
 	private void updateGameObjects() {
-		handler.updateGameComponents();
+		gameObjectManager.updateGameComponents();
 	}
 	
 	private void catchLag(double lagFactor) {
-		handler.updateVelocity(lagFactor);
+		gameObjectManager.updateVelocity(lagFactor);
 		
 	}
 	
 	private void render() {
-		guiManager.repaintComponents(handler.getGameComponents());
+		guiManager.repaintComponents(gameObjectManager.getGameComponents());
 	}
 	//---------------------------- end of game loop methods
 }
