@@ -27,7 +27,6 @@ public class Mouse extends MouseAdapter {
 	public void mouseClicked(MouseEvent e) {
 		mouseClicked = true;
 		clickedPoint = e.getPoint();
-		Console.printCurrentThreadName("Mouse clicked and the thread name is ");
 	}
 	
 	@Override
