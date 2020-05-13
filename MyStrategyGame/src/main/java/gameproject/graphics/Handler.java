@@ -30,10 +30,10 @@ public class Handler {
 		}
 	}
 	
-	public void updateVelocity(double velocity) {
+	public void updateVelocity(double lagFactor) {
 		for(GameComponent go: components) {
 			if(go instanceof GameObject) {
-				((GameObject) go).updateVelocity(velocity);
+				((GameObject) go).updateVelocity(lagFactor);
 			}
 		}
 	}

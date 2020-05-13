@@ -13,18 +13,14 @@ public abstract class GameObject extends GameComponent {
 		orgVelY = velocityY;
 	}
 	
-	// sets new velocity which is updated on the next cycle
-	/* vika, jos velocity on 1 ja lag update on 2 velocity päivitetään
-	 * 1*2, jolloin velocityksi jää 2. Jos seuraavalla kierroksella jäädään
-	 * taas jälkeen 2, niin velocityksi tulee 4 jne. Velocity ei palaudu alkuperäiseen
-	 * tällä hetkellä. */
-	public void updateVelocity(double velocity) {
-		setVelocityX(orgVelX);
-		setVelocityY(orgVelY);
+	// if lag, update to the original values
+	// then calculate velocity values by lag factor
+	public void updateVelocity(double lagFactor) {
+		setVelocitiesToOriginals();
 		
-		if(velocity >= 1) {
-			velocityX *= (int) velocity;
-			velocityY *= (int) velocity;
+		if(lagFactor >= 1) {
+			velocityX *= (int) lagFactor;
+			velocityY *= (int) lagFactor;
 		}
 	}
 	
@@ -34,6 +30,11 @@ public abstract class GameObject extends GameComponent {
 	
 	public void setVelocityY(double velY) {
 		velocityY = (int) velY;
+	}
+	
+	public void setVelocitiesToOriginals() {
+		setVelocityX(orgVelX);
+		setVelocityY(orgVelY);
 	}
 	
 }

@@ -104,6 +104,7 @@ public class Game implements Runnable {
 			// because Graphics takes integer values as arguments
 			// if it'd be Graphics2D, then it'd be useful
 			catchLag(lag / MS_PER_UPDATE);
+			
 			render();
 	
 		}
@@ -127,8 +128,8 @@ public class Game implements Runnable {
 		handler.updateGameComponents();
 	}
 	
-	private void catchLag(double scaledVelocity) {
-		handler.updateVelocity(scaledVelocity);
+	private void catchLag(double lagFactor) {
+		handler.updateVelocity(lagFactor);
 		
 	}
 	
