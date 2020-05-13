@@ -1,11 +1,8 @@
 package gameproject;
 
 import java.awt.Point;
-import java.util.LinkedList;
 
-import gameproject.graphics.GameComponent;
 import gameproject.graphics.GameObjectManager;
-import gameproject.graphics.Planet;
 import gameproject.gui.GuiManager;
 import gameproject.io.IO;
 import gameproject.io.Console;
