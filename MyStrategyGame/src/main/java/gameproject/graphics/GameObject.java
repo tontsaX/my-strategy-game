@@ -18,6 +18,11 @@ public abstract class GameObject extends GameComponent {
 	}
 	*/
 	
+	// sets new velocity which is updated on the next cycle
+	/* vika, jos velocity on 1 ja lag update on 2 velocity päivitetään
+	 * 1*2, jolloin velocityksi jää 2. Jos seuraavalla kierroksella jäädään
+	 * taas jälkeen 2, niin velocityksi tulee 4 jne. Velocity ei palaudu alkuperäiseen
+	 * tällä hetkellä. */
 	public void updateVelocity(double velocity) {
 		if(velocity >= 1) {
 			velocityX *= (int) velocity;
