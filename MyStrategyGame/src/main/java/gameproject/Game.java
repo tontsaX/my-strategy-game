@@ -1,24 +1,14 @@
 package gameproject;
 
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Point;
-import java.awt.Toolkit;
 import java.util.LinkedList;
-
-import javax.swing.JLayeredPane;
-import javax.swing.JScrollPane;
-import javax.swing.SwingUtilities;
 
 import gameproject.graphics.GameComponent;
 import gameproject.graphics.GameObjectManager;
 import gameproject.graphics.Planet;
-import gameproject.graphics.layers.SpriteLayer;
-import gameproject.gui.GameWindow;
 import gameproject.gui.GuiManager;
 import gameproject.io.IO;
 import gameproject.io.Console;
-import gameproject.io.Mouse;
 
 // This class is responsible of running the game
 public class Game implements Runnable {
@@ -38,28 +28,9 @@ public class Game implements Runnable {
 	public Game(String title) {
 		console = new Console();
 		
-		gameObjectManager = new GameObjectManager(createGameComponents());
+		gameObjectManager = new GameObjectManager();
 		
 		guiManager = GuiManager.buildGame();
-	}
-	
-	// This will go to GameObjectManager
-	private LinkedList<GameComponent> createGameComponents() {
-		LinkedList<GameComponent> components = new LinkedList<>();
-		
-		// Planet(coordinates x y, width, height, velocity/speed x y)
-		Planet earth = new Planet(1100, 800, 50, 50, 0, 0);
-		Planet mars = new Planet(133, 150, 40, 40, 0, 0);
-		
-		earth.setColorHex("#1E90FF");
-		earth.setBorderColorHex("#00BFFF");
-		mars.setColorHex("#CD5C5C");
-		mars.setBorderColorHex("#F08080");
-		
-		components.add(earth);
-		components.add(mars);
-		
-		return components;
 	}
 	
 	public void startGame() {

@@ -7,8 +7,26 @@ public class GameObjectManager {
 	// LinkedList is better for data manipulating than ArrayList
 	private LinkedList<GameComponent> components;
 	
-	public GameObjectManager(LinkedList<GameComponent> gameComponents) {
-		components = gameComponents;
+	public GameObjectManager() {
+		components = createTestGameComponents();
+	}
+	
+	private LinkedList<GameComponent> createTestGameComponents() {
+		LinkedList<GameComponent> components = new LinkedList<>();
+		
+		// Planet(coordinates x y, width, height, velocity/speed x y)
+		Planet earth = new Planet(1100, 800, 50, 50, 0, 0);
+		Planet mars = new Planet(133, 150, 40, 40, 0, 0);
+		
+		earth.setColorHex("#1E90FF");
+		earth.setBorderColorHex("#00BFFF");
+		mars.setColorHex("#CD5C5C");
+		mars.setBorderColorHex("#F08080");
+		
+		components.add(earth);
+		components.add(mars);
+		
+		return components;
 	}
 	
 	public void addGameComponent(GameComponent component) {
